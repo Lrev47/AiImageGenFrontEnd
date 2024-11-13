@@ -1,0 +1,70 @@
+/* Header.css */
+
+/* General header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #121223; /* Dark background */
+  color: #ffffff;
+}
+
+/* Logo and title */
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.website-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  background: linear-gradient(90deg, #e94057, #8a4de8); /* Gradient colors */
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Navigation buttons */
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  font-size: 1em;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 8px 16px;
+  margin: 0 5px;
+  background-color: #74768a00; /* Dark button background */
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #383a59; /* Slightly lighter on hover */
+}
+
+.try-button {
+  background-color: #41436a; /* Slightly different color for 'Try For Free' */
+}
+
+/* Dropdown menu icon */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.menu-bar {
+  width: 24px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 3px 0;
+}
