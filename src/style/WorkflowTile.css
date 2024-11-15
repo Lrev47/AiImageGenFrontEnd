@@ -1,0 +1,47 @@
+/* WorkflowTile.css */
+.workflow-tile {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.workflow-tile:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.tile-image {
+  background-size: cover;
+  background-position: center;
+  height: 60%;
+}
+
+.tile-content {
+  padding: 10px;
+}
+
+.tile-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(90deg, #e94057, #8a4de8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tile-description {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+}
+.workflow-tile.retro-anime .tile-image {
+  background-position: center bottom; /* Adjust as needed */
+}
