@@ -1,0 +1,132 @@
+/* WorkflowDetailPage.css */
+
+.workflow-page {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.workflow-title {
+  font-size: 2.5em;
+  background: linear-gradient(90deg, #e94057, #8a4de8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.image-display {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.generated-image {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.prompt-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prompt-input,
+.prompt-assistant {
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-input label,
+.prompt-assistant label {
+  font-weight: bold;
+  color: #aaaaaa;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #8a4de8;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e94057;
+}
+
+.carousel {
+  margin-top: 20px;
+}
+
+.carousel h3 {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.carousel-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.carousel-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.workflow-info {
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.workflow-info h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+.download-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-icon:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
