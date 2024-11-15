@@ -1,0 +1,24 @@
+/* GeneratePage.css */
+.generate-page {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 40px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 2.5em;
+  font-weight: bold;
+  background: linear-gradient(90deg, #e94057, #8a4de8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.workflow-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
