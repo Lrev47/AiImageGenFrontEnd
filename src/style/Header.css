@@ -6,8 +6,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #121223; /* Dark background */
+  background-color: #0b0b16; /* Dark background */
   color: #ffffff;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding in width */
 }
 
 /* Logo and title */
@@ -20,7 +22,7 @@
   font-size: 1.8em;
   font-weight: bold;
   background: linear-gradient(90deg, #e94057, #8a4de8); /* Gradient colors */
-  /* -webkit-background-clip: text; */
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
@@ -36,8 +38,8 @@
   font-weight: 500;
   color: #ffffff;
   padding: 8px 16px;
-  margin: 0 5px;
-  background-color: #74768a00; /* Dark button background */
+  margin: 0 -100px;
+  background-color: transparent;
   border: none;
   border-radius: 20px;
   cursor: pointer;
