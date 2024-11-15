@@ -15,7 +15,7 @@ const Header = () => {
           Login
         </Link>
         <Link to="/try-for-free" className="nav-button try-button">
-          Try For Free
+          In Development
         </Link>
         <div className="menu-icon">
           <div className="menu-bar"></div>
