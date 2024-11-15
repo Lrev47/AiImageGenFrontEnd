@@ -6,6 +6,7 @@
 .landing-page {
   position: relative;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
   background-color: #000;
@@ -109,21 +110,21 @@
 /* Left Side Buttons */
 .left-button-1 {
   top: 30%;
-  left: 10%;
+  left: 27%;
   animation: float1 4s ease-in-out infinite;
   animation-delay: 0s;
 }
 
 .left-button-2 {
   top: 50%;
-  left: 7%;
+  left: 20%;
   animation: float2 5s ease-in-out infinite;
   animation-delay: 0.2s;
 }
 
 .left-button-3 {
   top: 70%;
-  left: 10%;
+  left: 27%;
   animation: float3 4.5s ease-in-out infinite;
   animation-delay: 0.4s;
 }
@@ -131,21 +132,21 @@
 /* Right Side Buttons */
 .right-button-1 {
   top: 30%;
-  right: 10%;
+  right: 27%;
   animation: float2 4.8s ease-in-out infinite;
   animation-delay: 0.1s;
 }
 
 .right-button-2 {
   top: 50%;
-  right: 7%;
+  right: 20%;
   animation: float4 5.2s ease-in-out infinite;
   animation-delay: 0.3s;
 }
 
 .right-button-3 {
   top: 70%;
-  right: 10%;
+  right: 27%;
   animation: float3 4.2s ease-in-out infinite;
   animation-delay: 0.5s;
 }
@@ -164,11 +165,17 @@
 @media (min-width: 1200px) {
   .left-button-1,
   .left-button-3 {
-    left: 15%;
+    left: 30%;
   }
 
   .right-button-1,
   .right-button-3 {
-    right: 15%;
+    right: 30%;
   }
+}
+.left-button-2 {
+  left: 20%;
+}
+.right-button-2 {
+  right: 20%;
 }
