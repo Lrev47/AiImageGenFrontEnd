@@ -7,8 +7,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-logo">
-        <h1 className="website-title">MetaCre8</h1>{" "}
-        {/* Updated website name with gradient text */}
+        <Link to="/" className="website-title-link">
+          <h1 className="website-title">MetaCre8</h1>
+        </Link>
       </div>
       <nav className="header-nav">
         <Link to="/login" className="nav-button">
