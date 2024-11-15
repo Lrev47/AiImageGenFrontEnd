@@ -15,18 +15,33 @@ const LandingPage = () => {
       <Link to="/gallery" className="nav-button left-button-2">
         Gallery
       </Link>
-      <Link to="/about" className="nav-button left-button-3">
+      <a
+        href="https://github.com/Lrev47/AiImageGenFrontEnd"
+        className="nav-button left-button-3"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         About
-      </Link>
+      </a>
       {/* Right Side Buttons */}
-      <Link to="/contact" className="nav-button right-button-1">
+      <a
+        href="https://luisrevilla.dev/"
+        className="nav-button right-button-1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Contact
-      </Link>
-      <Link to="/help" className="nav-button right-button-2">
-        Help
-      </Link>
-      <Link to="/settings" className="nav-button right-button-3">
-        Settings
+      </a>
+      <a
+        href="https://www.linkedin.com/in/luisrevilla47"
+        className="nav-button right-button-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Social Media
+      </a>
+      <Link to="/Future Plans" className="nav-button right-button-3">
+        Future Plans
       </Link>
     </div>
   );
