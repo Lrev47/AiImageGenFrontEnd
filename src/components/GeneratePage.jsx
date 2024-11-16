@@ -10,8 +10,8 @@ const GeneratePage = () => {
       <h1 className="page-title">Choose Your Workflow</h1>
       <div className="workflow-grid">
         <WorkflowTile
-          title="FluxDev1"
-          description="A general-purpose AI image generation model."
+          title="MidJourney V6.1"
+          description="Vibrant, colorful, and abstract art."
           image="https://imagizer.imageshack.com/img923/5844/AumCP9.png"
           link="/workflow/fluxdev1"
         />
