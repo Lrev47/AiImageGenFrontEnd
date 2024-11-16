@@ -1,8 +1,15 @@
-// LandingPage.jsx
+// src/components/LandingPage.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import SplineModel from "../assets/splineModel"; // Ensure the path is correct
 import "../style/LandingPage.css"; // Ensure the path is correct
+
+// Access environment variables using import.meta.env
+const runpodUrl = import.meta.env.VITE_RUNPOD_URL;
+const runpodToken = import.meta.env.VITE_RUNPOD_TOKEN;
+
+console.log("RunPod URL:", runpodUrl);
+console.log("RunPod Token:", runpodToken);
 
 const LandingPage = () => {
   return (
@@ -40,7 +47,7 @@ const LandingPage = () => {
       >
         Social Media
       </a>
-      <Link to="/Future Plans" className="nav-button right-button-3">
+      <Link to="/future-plans" className="nav-button right-button-3">
         Future Plans
       </Link>
     </div>
