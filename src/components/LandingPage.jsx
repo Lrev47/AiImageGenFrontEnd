@@ -11,6 +11,10 @@ const runpodToken = import.meta.env.VITE_RUNPOD_TOKEN;
 console.log("RunPod URL:", runpodUrl);
 console.log("RunPod Token:", runpodToken);
 
+/**
+ * Renders the Landing Page with interactive buttons and a 3D model.
+ * @returns {JSX.Element} - The Landing Page component.
+ */
 const LandingPage = () => {
   return (
     <div className="landing-page">
