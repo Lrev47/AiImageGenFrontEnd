@@ -1,4 +1,4 @@
-/* WorkflowDetailPage.css */
+/* src/pages/FluxDevWorkflows/MidJourney V6.1/midJourneyV6.1Page.css */
 
 .workflow-page {
   background-color: #121212;
@@ -41,25 +41,28 @@
   object-fit: contain; /* Maintain aspect ratio */
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+}
+
 .prompt-inputs {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.prompt-input,
-.prompt-assistant {
+.prompt-input {
   display: flex;
   flex-direction: column;
 }
 
-.prompt-input label,
-.prompt-assistant label {
+.prompt-input label {
   font-weight: bold;
   color: #aaaaaa;
 }
 
-input[type="text"] {
+.prompt-input input {
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -68,7 +71,7 @@ input[type="text"] {
   margin-top: 5px;
 }
 
-button {
+.prompt-input button {
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #8a4de8;
@@ -79,8 +82,9 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #e94057;
+.prompt-input button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
 }
 
 .carousel {
@@ -112,16 +116,6 @@ button:hover {
   object-fit: cover;
 }
 
-.workflow-info {
-  background-color: #1c1c1c;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.workflow-info h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
 .download-icon {
   position: absolute;
   top: 5px;
@@ -135,4 +129,15 @@ button:hover {
 
 .download-icon:hover {
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+.workflow-info {
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.workflow-info h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }

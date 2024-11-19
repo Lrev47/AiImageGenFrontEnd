@@ -1,15 +1,23 @@
+// src/pages/FluxDevWorkflows/MidJourney V6.1/midJourneyV6.1Page.jsx
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadWorkflow, setPrompt } from "../workflowSlice";
-import { startJob, pollJobStatus } from "../api/runpod/runpodApi";
-import "../style/WorkflowDetailPage.css";
+import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
+import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
+import "./midJourneyV6.1Page.css";
 
-const WorkflowDetailPage = () => {
-  const { workflowId } = useParams();
+/**
+ * Renders the MidJourney V6.1 Workflow Detail Page.
+ * @returns {JSX.Element} - The MidJourney V6.1 Page component.
+ */
+const MidJourneyV61Page = () => {
+  const workflowId = "midJourneyV6_1"; // Fixed workflow ID
   const dispatch = useDispatch();
-  const workflowData = useSelector((state) => state.workflow.workflowData);
-  const prompt = useSelector((state) => state.workflow.prompt);
+  const workflowData = useSelector(
+    (state) => state.workflow.workflows[workflowId]
+  );
+  const prompt = useSelector(
+    (state) => state.workflow.prompts[workflowId] || ""
+  );
   const [generatedImage, setGeneratedImage] = useState(null);
   const [imageHistory, setImageHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,9 +28,17 @@ const WorkflowDetailPage = () => {
     dispatch(loadWorkflow(workflowId));
   }, [workflowId, dispatch]);
 
+  /**
+   * Handles changes to the prompt input field.
+   * @param {Object} event - The input change event.
+   */
   const handlePromptChange = (event) => {
-    dispatch(setPrompt(event.target.value));
+    dispatch(setPrompt({ workflowId, prompt: event.target.value }));
   };
+
+  /**
+   * Handles the image generation process.
+   */
   const handleGenerateImage = async () => {
     if (!workflowData || !workflowData.input || !workflowData.input.workflow) {
       console.error("Workflow data is not loaded or is invalid:", workflowData);
@@ -64,6 +80,10 @@ const WorkflowDetailPage = () => {
     }
   };
 
+  /**
+   * Initiates the download of a generated image.
+   * @param {string} image - The base64 image string.
+   */
   const handleDownloadImage = (image) => {
     const link = document.createElement("a");
     link.href = image;
@@ -73,7 +93,7 @@ const WorkflowDetailPage = () => {
 
   return (
     <div className="workflow-page">
-      <h1 className="workflow-title">{workflowId.replace("-", " ")}</h1>
+      <h1 className="workflow-title">MidJourney V6.1</h1>
 
       {/* Display generated image */}
       <div className="image-display">
@@ -95,8 +115,9 @@ const WorkflowDetailPage = () => {
       {/* Prompt input section */}
       <div className="prompt-inputs">
         <div className="prompt-input">
-          <label>Enter your prompt:</label>
+          <label htmlFor="prompt-input">Enter your prompt:</label>
           <input
+            id="prompt-input"
             type="text"
             value={prompt}
             onChange={handlePromptChange}
@@ -152,4 +173,4 @@ const WorkflowDetailPage = () => {
   );
 };
 
-export default WorkflowDetailPage;
+export default MidJourneyV61Page;
