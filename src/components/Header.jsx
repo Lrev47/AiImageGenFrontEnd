@@ -1,8 +1,12 @@
-// Header.jsx
+// src/components/Header.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import "../style/Header.css";
 
+/**
+ * Renders the website header with navigation links.
+ * @returns {JSX.Element} - The Header component.
+ */
 const Header = () => {
   return (
     <header className="header">
