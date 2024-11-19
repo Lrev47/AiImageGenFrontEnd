@@ -1,7 +1,13 @@
-// src/api.js
+// src/api/runpod/runpodApi.js
+
 const RUNPOD_URL = import.meta.env.VITE_RUNPOD_URL;
 const RUNPOD_TOKEN = import.meta.env.VITE_RUNPOD_TOKEN;
 
+/**
+ * Starts a job by sending workflow data to the RunPod API.
+ * @param {Object} workflowData - The workflow configuration data.
+ * @returns {Promise<string>} - The job ID returned by the API.
+ */
 export const startJob = async (workflowData) => {
   try {
     const response = await fetch(`${RUNPOD_URL}/run`, {
@@ -26,6 +32,11 @@ export const startJob = async (workflowData) => {
   }
 };
 
+/**
+ * Polls the job status until completion or until maximum retries are reached.
+ * @param {string} jobId - The ID of the job to poll.
+ * @returns {Promise<string|null>} - The base64 image string if completed, else null.
+ */
 export const pollJobStatus = async (jobId) => {
   try {
     let isCompleted = false;
@@ -54,7 +65,7 @@ export const pollJobStatus = async (jobId) => {
       } else if (responseData.status === "FAILED") {
         throw new Error("Job failed");
       } else {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait for 3 seconds before retrying
       }
 
       retries++;
