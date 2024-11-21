@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
 import "./midJourneyV6.1Page.css";
+import LoadingAnimation from "../../../components/LoadingAnimation";
 
 /**
  * Renders the MidJourney V6.1 Workflow Detail Page.
@@ -22,6 +23,9 @@ const MidJourneyV61Page = () => {
   const [imageHistory, setImageHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Define fixed parts of the prompt
+  const FIXED_PROMPT = "aidmaMJ6.1,";
 
   // Load workflow data when the component mounts
   useEffect(() => {
@@ -51,9 +55,25 @@ const MidJourneyV61Page = () => {
 
     try {
       const updatedData = JSON.parse(JSON.stringify(workflowData));
-      updatedData.input.workflow["6"].inputs.text = prompt;
 
-      console.log("Prompt:", prompt);
+      // Combine user prompt with fixed prompt parts
+      const userPrompt = prompt.trim();
+      const combinedPrompt = `${userPrompt}\n\n${FIXED_PROMPT}`;
+
+      // Update the prompt in the workflow JSON
+      updatedData.input.workflow["6"].inputs.text = combinedPrompt;
+
+      console.log("Combined Prompt:", combinedPrompt);
+      console.log("Updated JSON for API call:", updatedData);
+
+      // **Generate a random noise seed**
+      const randomSeed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+
+      // Update the noise seed in the workflow JSON
+      updatedData.input.workflow["25"].inputs.noise_seed = randomSeed;
+
+      console.log("Combined Prompt:", combinedPrompt);
+      console.log("Random Noise Seed:", randomSeed);
       console.log("Updated JSON for API call:", updatedData);
 
       // Start the job and get the job ID
@@ -98,7 +118,7 @@ const MidJourneyV61Page = () => {
       {/* Display generated image */}
       <div className="image-display">
         {loading ? (
-          <p>Generating image, please wait...</p>
+          <LoadingAnimation />
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : generatedImage ? (
@@ -124,6 +144,7 @@ const MidJourneyV61Page = () => {
             placeholder="Type your prompt here..."
             disabled={loading}
           />
+          {/* <small className="fixed-prompt">Fixed: {FIXED_PROMPT}</small> */}
           <button onClick={handleGenerateImage} disabled={loading}>
             {loading ? "Generating..." : "Generate Image"}
           </button>
