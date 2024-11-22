@@ -1,6 +1,5 @@
 .loading-animation-container {
-  --uib-size: 45px;
-  --uib-color: black;
+  --uib-size: 65px;
   --uib-speed: 1.75s;
   position: relative;
   height: var(--uib-size);
@@ -29,58 +28,71 @@
   width: 100%;
 }
 
-/* Define styles for each particle */
+/* Define styles for each particle with gradient colors */
 .loading-particle:nth-child(1) {
   --uib-delay: 0;
   transform: rotate(8deg);
+  color: #e94057; /* Start color */
 }
 .loading-particle:nth-child(2) {
   --uib-delay: -0.4;
   transform: rotate(36deg);
+  color: #e84564;
 }
 .loading-particle:nth-child(3) {
   --uib-delay: -0.9;
   transform: rotate(72deg);
+  color: #e74b71;
 }
 .loading-particle:nth-child(4) {
   --uib-delay: -0.5;
   transform: rotate(90deg);
+  color: #e6517e;
 }
 .loading-particle:nth-child(5) {
   --uib-delay: -0.3;
   transform: rotate(144deg);
+  color: #e5578b;
 }
 .loading-particle:nth-child(6) {
   --uib-delay: -0.2;
   transform: rotate(180deg);
+  color: #e45d98;
 }
 .loading-particle:nth-child(7) {
   --uib-delay: -0.6;
   transform: rotate(216deg);
-}
-.loading-particle:nth-child(8) {
-  --uib-delay: -0.7;
-  transform: rotate(252deg);
-}
-.loading-particle:nth-child(9) {
-  --uib-delay: -0.1;
-  transform: rotate(300deg);
-}
-.loading-particle:nth-child(10) {
-  --uib-delay: -0.8;
-  transform: rotate(324deg);
-}
-.loading-particle:nth-child(11) {
-  --uib-delay: -1.2;
-  transform: rotate(335deg);
-}
-.loading-particle:nth-child(12) {
-  --uib-delay: -0.5;
-  transform: rotate(290deg);
+  color: #e363a5;
 }
 .loading-particle:nth-child(13) {
   --uib-delay: -0.2;
   transform: rotate(240deg);
+  color: #e269b2;
+}
+.loading-particle:nth-child(8) {
+  --uib-delay: -0.7;
+  transform: rotate(252deg);
+  color: #e16fbf;
+}
+.loading-particle:nth-child(12) {
+  --uib-delay: -0.5;
+  transform: rotate(290deg);
+  color: #e075cc;
+}
+.loading-particle:nth-child(9) {
+  --uib-delay: -0.1;
+  transform: rotate(300deg);
+  color: #df7bd9;
+}
+.loading-particle:nth-child(10) {
+  --uib-delay: -0.8;
+  transform: rotate(324deg);
+  color: #de81e6;
+}
+.loading-particle:nth-child(11) {
+  --uib-delay: -1.2;
+  transform: rotate(335deg);
+  color: #8a4de8; /* End color */
 }
 
 .loading-particle::before {
@@ -89,7 +101,7 @@
   height: 17.5%;
   width: 17.5%;
   border-radius: 50%;
-  background-color: var(--uib-color);
+  background-color: currentColor; /* Use the color defined in parent */
   flex-shrink: 0;
   transition: background-color 0.3s ease;
   --uib-d: calc(var(--uib-delay) * var(--uib-speed));

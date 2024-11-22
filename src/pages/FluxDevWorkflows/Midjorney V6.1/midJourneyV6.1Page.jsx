@@ -1,4 +1,3 @@
-// src/pages/FluxDevWorkflows/MidJourney V6.1/midJourneyV6.1Page.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
@@ -24,13 +23,51 @@ const MidJourneyV61Page = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // GPU readiness state
+  const [gpuReady, setGpuReady] = useState(false);
+
   // Define fixed parts of the prompt
   const FIXED_PROMPT = "aidmaMJ6.1,";
+
+  // Define your model description here
+  const modelDescription = `
+    MidJourney V6.1 is an advanced AI model designed for generating high-quality images based on textual prompts.
+    It leverages state-of-the-art neural networks to interpret and render your ideas into visual art.
+    Features include:
+    - High-resolution output
+    - Support for various artistic styles
+    - Fast generation times
+    - Customizable parameters for fine-tuning results
+  `;
 
   // Load workflow data when the component mounts
   useEffect(() => {
     dispatch(loadWorkflow(workflowId));
   }, [workflowId, dispatch]);
+
+  // Trigger GPU warm-up on page load
+  useEffect(() => {
+    const warmupGPU = async () => {
+      try {
+        // Send warm-up request using startJob
+        const jobId = await startJob({
+          input: {
+            action: "warmup",
+          },
+        });
+
+        // Poll the job status until it's completed
+        await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes for warm-up
+
+        setGpuReady(true);
+      } catch (error) {
+        console.error("Error warming up GPU:", error);
+        setError("Error warming up GPU. Please try again later.");
+      }
+    };
+
+    warmupGPU();
+  }, []);
 
   /**
    * Handles changes to the prompt input field.
@@ -72,7 +109,6 @@ const MidJourneyV61Page = () => {
       // Update the noise seed in the workflow JSON
       updatedData.input.workflow["25"].inputs.noise_seed = randomSeed;
 
-      console.log("Combined Prompt:", combinedPrompt);
       console.log("Random Noise Seed:", randomSeed);
       console.log("Updated JSON for API call:", updatedData);
 
@@ -80,7 +116,7 @@ const MidJourneyV61Page = () => {
       const jobId = await startJob(updatedData);
 
       // Poll the job status to get the image
-      const base64Image = await pollJobStatus(jobId);
+      const base64Image = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes
 
       if (base64Image) {
         const imageUrl = `data:image/png;base64,${base64Image}`;
@@ -107,7 +143,7 @@ const MidJourneyV61Page = () => {
   const handleDownloadImage = (image) => {
     const link = document.createElement("a");
     link.href = image;
-    link.download = "generated-image.jpg";
+    link.download = "generated-image.png";
     link.click();
   };
 
@@ -132,6 +168,11 @@ const MidJourneyV61Page = () => {
         )}
       </div>
 
+      {/* GPU Status Indicator */}
+      {!gpuReady && (
+        <p className="gpu-status">GPU is starting up. Please wait...</p>
+      )}
+
       {/* Prompt input section */}
       <div className="prompt-inputs">
         <div className="prompt-input">
@@ -142,10 +183,10 @@ const MidJourneyV61Page = () => {
             value={prompt}
             onChange={handlePromptChange}
             placeholder="Type your prompt here..."
-            disabled={loading}
+            disabled={loading || !gpuReady}
           />
           {/* <small className="fixed-prompt">Fixed: {FIXED_PROMPT}</small> */}
-          <button onClick={handleGenerateImage} disabled={loading}>
+          <button onClick={handleGenerateImage} disabled={loading || !gpuReady}>
             {loading ? "Generating..." : "Generate Image"}
           </button>
         </div>
@@ -188,7 +229,7 @@ const MidJourneyV61Page = () => {
       {/* Workflow description */}
       <div className="workflow-info">
         <h3>About this AI Model</h3>
-        <p>{workflowData?._meta?.description || "No description available."}</p>
+        <p>{modelDescription}</p>
       </div>
     </div>
   );

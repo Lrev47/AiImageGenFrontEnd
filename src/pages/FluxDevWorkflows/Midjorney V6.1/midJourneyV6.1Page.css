@@ -29,6 +29,7 @@
   /* Dynamically adjust the height */
   max-height: 100%;
   overflow: hidden;
+  min-height: 500px;
 }
 
 .generated-image {
@@ -140,4 +141,10 @@
 .workflow-info h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
+}
+
+.gpu-status {
+  color: #ffaa00;
+  text-align: center;
+  margin-top: 10px;
 }

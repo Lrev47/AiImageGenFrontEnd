@@ -20,7 +20,8 @@ export const startJob = async (workflowData) => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to start job");
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to start job");
     }
 
     const responseData = await response.json();
@@ -35,14 +36,19 @@ export const startJob = async (workflowData) => {
 /**
  * Polls the job status until completion or until maximum retries are reached.
  * @param {string} jobId - The ID of the job to poll.
+ * @param {number} [maxRetries=60] - Maximum number of retries.
+ * @param {number} [retryDelay=5000] - Delay between retries in milliseconds.
  * @returns {Promise<string|null>} - The base64 image string if completed, else null.
  */
-export const pollJobStatus = async (jobId) => {
+export const pollJobStatus = async (
+  jobId,
+  maxRetries = 60,
+  retryDelay = 5000
+) => {
   try {
     let isCompleted = false;
     let imageBase64 = null;
     let retries = 0;
-    const maxRetries = 20;
 
     while (!isCompleted && retries < maxRetries) {
       const response = await fetch(`${RUNPOD_URL}/status/${jobId}`, {
@@ -65,10 +71,9 @@ export const pollJobStatus = async (jobId) => {
       } else if (responseData.status === "FAILED") {
         throw new Error("Job failed");
       } else {
-        await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait for 3 seconds before retrying
+        await new Promise((resolve) => setTimeout(resolve, retryDelay)); // Wait before retrying
+        retries++;
       }
-
-      retries++;
     }
 
     if (!isCompleted) {

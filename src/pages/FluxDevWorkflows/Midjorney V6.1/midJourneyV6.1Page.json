@@ -14,7 +14,7 @@
       },
       "6": {
         "inputs": {
-          "text": "A door floating in mid-air within a Black and Red Surrealist landscape.\n\nA blue robot sit on the door.\n\nA rainbow-colored butterfly flies over the robot's head.\n\nHD32K, hyperdetailed, best quality,\n\naidmaMJ6.1,\n",
+          "text": "A door floating in mid-air within a Black and Red Surrealist landscape. A blue robot sit on the door. A rainbow-colored butterfly flies over the robot's head. HD32K, hyperdetailed, best quality, aidmaMJ6.1,",
           "clip": ["11", 0]
         },
         "class_type": "CLIPTextEncode",
