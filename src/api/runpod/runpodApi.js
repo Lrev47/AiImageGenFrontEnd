@@ -38,7 +38,7 @@ export const startJob = async (workflowData) => {
  * @param {string} jobId - The ID of the job to poll.
  * @param {number} [maxRetries=60] - Maximum number of retries.
  * @param {number} [retryDelay=5000] - Delay between retries in milliseconds.
- * @returns {Promise<string|null>} - The base64 image string if completed, else null.
+ * @returns {Promise<any>} - The output data returned by the job.
  */
 export const pollJobStatus = async (
   jobId,
@@ -47,7 +47,7 @@ export const pollJobStatus = async (
 ) => {
   try {
     let isCompleted = false;
-    let imageBase64 = null;
+    let outputData = null;
     let retries = 0;
 
     while (!isCompleted && retries < maxRetries) {
@@ -67,7 +67,7 @@ export const pollJobStatus = async (
 
       if (responseData.status === "COMPLETED") {
         isCompleted = true;
-        imageBase64 = responseData.output?.message || null;
+        outputData = responseData.output;
       } else if (responseData.status === "FAILED") {
         throw new Error("Job failed");
       } else {
@@ -80,7 +80,7 @@ export const pollJobStatus = async (
       throw new Error("Max retries reached. Job polling timed out.");
     }
 
-    return imageBase64;
+    return outputData;
   } catch (error) {
     console.error("Error polling job status:", error);
     throw error;

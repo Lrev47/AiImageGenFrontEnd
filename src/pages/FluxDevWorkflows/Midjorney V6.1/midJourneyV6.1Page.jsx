@@ -1,3 +1,5 @@
+// src/pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page.jsx
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
@@ -57,12 +59,21 @@ const MidJourneyV61Page = () => {
         });
 
         // Poll the job status until it's completed
-        await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes for warm-up
+        const warmupResult = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes for warm-up
 
-        setGpuReady(true);
+        if (warmupResult && warmupResult.status === "GPU warmed up") {
+          setGpuReady(true);
+        } else {
+          console.error("Unexpected warm-up result:", warmupResult);
+          // Proceed to set GPU as ready even if the result is unexpected
+          setGpuReady(true);
+        }
       } catch (error) {
         console.error("Error warming up GPU:", error);
-        setError("Error warming up GPU. Please try again later.");
+        // Proceed to set GPU as ready even if an error occurred
+        setGpuReady(true);
+        // Optionally, you can set an error message if you want to inform the user
+        // setError("Error warming up GPU. Some functionalities may be limited.");
       }
     };
 
@@ -116,14 +127,15 @@ const MidJourneyV61Page = () => {
       const jobId = await startJob(updatedData);
 
       // Poll the job status to get the image
-      const base64Image = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes
+      const jobResult = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes
 
-      if (base64Image) {
+      if (jobResult && jobResult.status === "success" && jobResult.message) {
+        const base64Image = jobResult.message;
         const imageUrl = `data:image/png;base64,${base64Image}`;
         setGeneratedImage(imageUrl);
         setImageHistory((prevHistory) => [imageUrl, ...prevHistory]);
       } else {
-        console.error("No image returned from API");
+        console.error("No image returned from API:", jobResult);
         setError("No image returned. Please try again.");
       }
     } catch (error) {
@@ -169,7 +181,7 @@ const MidJourneyV61Page = () => {
       </div>
 
       {/* GPU Status Indicator */}
-      {!gpuReady && (
+      {!gpuReady && !error && (
         <p className="gpu-status">GPU is starting up. Please wait...</p>
       )}
 
