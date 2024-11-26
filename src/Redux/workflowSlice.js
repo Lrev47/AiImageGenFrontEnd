@@ -2,10 +2,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Import all JSON files in the specified directory and subdirectories
-const workflowModules = import.meta.glob(
-  "../pages/FluxDevWorkflows/**/**.json",
-  { eager: true }
-);
+const workflowModules = import.meta.glob("../pages/**/**/**.json", {
+  eager: true,
+});
 
 console.log("workflowModules keys:", Object.keys(workflowModules));
 
@@ -13,6 +12,8 @@ console.log("workflowModules keys:", Object.keys(workflowModules));
 const workflowModuleMap = {
   midJourneyV6_1:
     "../pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page.json",
+  cyberRealisticPonyV6:
+    "../pages/ComfyBundle1/CyberRealisticPonyV6.5/cyberRealisticPony.json",
   // Add other workflows here
 };
 

@@ -44,6 +44,12 @@ const GeneratePage = () => {
           image="https://imagizer.imageshack.com/img923/7379/CUvNGU.png"
           link="/workflows/CandidPhotos"
         />
+        <WorkflowTile
+          title="Cyber Realistic Pony V6.5"
+          description="Realistic Images"
+          image="https://imagizer.imageshack.com/img924/9959/euhyer.png"
+          link="/workflows/cyberRealisticPonyV6"
+        />
       </div>
     </div>
   );

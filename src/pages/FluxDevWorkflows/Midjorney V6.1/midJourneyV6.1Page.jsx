@@ -1,4 +1,4 @@
-// src/pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page.jsx
+// src/pages/FluxDevWorkflows/Midjourney V6.1/midJourneyV6.1Page.jsx
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,36 +47,35 @@ const MidJourneyV61Page = () => {
     dispatch(loadWorkflow(workflowId));
   }, [workflowId, dispatch]);
 
+  // Define warmupGPU outside of useEffect
+  const warmupGPU = async () => {
+    try {
+      setError(null); // Clear any previous errors
+      // Send warm-up request using startJob
+      const jobId = await startJob({
+        input: {
+          action: "warmup",
+        },
+      });
+
+      // Poll the job status until it's completed
+      const warmupResult = await pollJobStatus(jobId, false, 60, 5000); // Corrected parameter order
+
+      if (warmupResult && warmupResult.status === "GPU warmed up") {
+        setGpuReady(true);
+      } else {
+        console.error("Unexpected warm-up result:", warmupResult);
+        setError("Unexpected warm-up result. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error warming up GPU:", error);
+      setError("Error warming up GPU. Please wait and try again.");
+    }
+  };
+
   // Trigger GPU warm-up on page load
   useEffect(() => {
-    const warmupGPU = async () => {
-      try {
-        // Send warm-up request using startJob
-        const jobId = await startJob({
-          input: {
-            action: "warmup",
-          },
-        });
-
-        // Poll the job status until it's completed
-        const warmupResult = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes for warm-up
-
-        if (warmupResult && warmupResult.status === "GPU warmed up") {
-          setGpuReady(true);
-        } else {
-          console.error("Unexpected warm-up result:", warmupResult);
-          // Proceed to set GPU as ready even if the result is unexpected
-          setGpuReady(true);
-        }
-      } catch (error) {
-        console.error("Error warming up GPU:", error);
-        // Proceed to set GPU as ready even if an error occurred
-        setGpuReady(true);
-        // Optionally, you can set an error message if you want to inform the user
-        // setError("Error warming up GPU. Some functionalities may be limited.");
-      }
-    };
-
+    setGpuReady(false); // Reset gpuReady to false when the component mounts
     warmupGPU();
   }, []);
 
@@ -127,7 +126,7 @@ const MidJourneyV61Page = () => {
       const jobId = await startJob(updatedData);
 
       // Poll the job status to get the image
-      const jobResult = await pollJobStatus(jobId, 60, 5000); // Allow up to 5 minutes
+      const jobResult = await pollJobStatus(jobId, false, 60, 5000); // Corrected parameter order
 
       if (jobResult && jobResult.status === "success" && jobResult.message) {
         const base64Image = jobResult.message;
@@ -183,6 +182,14 @@ const MidJourneyV61Page = () => {
       {/* GPU Status Indicator */}
       {!gpuReady && !error && (
         <p className="gpu-status">GPU is starting up. Please wait...</p>
+      )}
+      {error && (
+        <div className="error-container">
+          <p className="error-message">{error}</p>
+          <button onClick={warmupGPU} disabled={loading}>
+            Retry Warm-up
+          </button>
+        </div>
       )}
 
       {/* Prompt input section */}
