@@ -12,7 +12,7 @@ const Header = () => {
     <header className="header">
       <div className="header-logo">
         <Link to="/" className="website-title-link">
-          <h1 className="website-title">MetaCre8</h1>
+          <h1 className="website-title">Ai SynthLab</h1>
         </Link>
       </div>
       <nav className="header-nav">
