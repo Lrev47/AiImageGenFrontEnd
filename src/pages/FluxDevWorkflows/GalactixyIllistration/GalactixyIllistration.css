@@ -1,0 +1,81 @@
+.workflow-page {
+  background-color: #0f1e2e;
+  color: #ffffff;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.workflow-title {
+  font-size: 2.5em;
+  background: linear-gradient(90deg, #4caf50, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.image-display {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c2833;
+  border-radius: 10px;
+  min-height: 300px;
+}
+
+.generated-image {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.prompt-inputs {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-input input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+}
+
+.prompt-input button {
+  padding: 10px 15px;
+  background-color: #00bcd4;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.prompt-input button:disabled {
+  background-color: #555;
+}
+
+.carousel {
+  margin-top: 20px;
+}
+
+.carousel-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.carousel-item img {
+  height: 100px;
+  border-radius: 5px;
+}
+
+.workflow-info {
+  margin-top: 20px;
+  background-color: #1c2833;
+  padding: 15px;
+  border-radius: 10px;
+}

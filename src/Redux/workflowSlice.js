@@ -14,6 +14,13 @@ const workflowModuleMap = {
     "../pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page.json",
   cyberRealisticPonyV6:
     "../pages/ComfyBundle1/CyberRealisticPonyV6.5/cyberRealisticPony.json",
+  CandidPhotos: "../pages/FluxDevWorkflows/CandidPhotos/CandidPhotos.json",
+  Claymation: "../pages/FluxDevWorkflows/Claymation/Claymation.json",
+  GalactixyIllistration:
+    "../pages/FluxDevWorkflows/GalactixyIllistration/GalactixyIllistration.json",
+  HandDrawnMoviePosters:
+    "../pages/FluxDevWorkflows/HandDrawnMoviePosters/HandDrawnMoviePosters.json",
+  RetroAnime: "../pages/FluxDevWorkflows/RetroAnime/RetroAnime.json",
   // Add other workflows here
 };
 

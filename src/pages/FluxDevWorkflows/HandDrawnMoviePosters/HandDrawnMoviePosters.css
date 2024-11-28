@@ -1,0 +1,133 @@
+/* Updated CSS to match midJourneyV6.1Page.css style */
+
+.workflow-page {
+  background-color: #0f1e2e; /* Kept your original background color */
+  color: #ffffff;
+  padding: 40px; /* Increased padding to match midJourneyV6.1Page.css */
+  max-width: 800px; /* Adjusted max-width for consistency */
+  margin: auto;
+  min-height: 100vh; /* Added for full viewport height */
+  display: flex; /* Added for flex layout */
+  flex-direction: column;
+  gap: 20px; /* Added gap between elements */
+}
+
+.workflow-title {
+  font-size: 2.5em;
+  background: linear-gradient(
+    90deg,
+    #4caf50,
+    #00bcd4
+  ); /* Kept your original gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.image-display {
+  background-color: #1c2833; /* Kept your original background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Adjusted margin */
+  border-radius: 10px;
+  max-height: 100%; /* Added to match midJourneyV6.1Page.css */
+  overflow: hidden; /* Added to match midJourneyV6.1Page.css */
+  min-height: 500px; /* Increased to match midJourneyV6.1Page.css */
+}
+
+.generated-image {
+  display: block; /* Added for consistency */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 600px; /* Adjusted for better image scaling */
+  border-radius: 8px; /* Adjusted border radius */
+  object-fit: contain; /* Maintain aspect ratio */
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+.prompt-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Added gap for consistency */
+}
+
+.prompt-inputs label {
+  font-weight: bold;
+  color: #aaaaaa;
+}
+
+.prompt-inputs input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333333;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+.prompt-inputs button {
+  margin-top: 10px; /* Added margin for spacing */
+  padding: 10px 20px; /* Adjusted padding */
+  background-color: #00bcd4; /* Kept your original button color */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Added transition for hover effect */
+}
+
+.prompt-inputs button:disabled {
+  background-color: #6c757d; /* Updated to match disabled styling */
+  cursor: not-allowed;
+}
+
+.carousel {
+  margin-top: 20px;
+}
+
+.carousel h3 {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.carousel-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.carousel-item {
+  position: relative; /* Added for consistency */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-item img {
+  height: 80px; /* Adjusted height for consistency */
+  width: 80px; /* Added width for consistent sizing */
+  border-radius: 5px;
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+.workflow-info {
+  background-color: #1c2833; /* Kept your original background color */
+  padding: 20px; /* Adjusted padding for consistency */
+  border-radius: 10px;
+}
+
+.workflow-info h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px; /* Added margin for spacing */
+}
+
+.gpu-status {
+  color: #ffaa00;
+  text-align: center;
+  margin-top: 10px;
+}

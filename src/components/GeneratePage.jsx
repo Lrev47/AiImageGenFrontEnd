@@ -23,7 +23,7 @@ const GeneratePage = () => {
           title="Retro Hand Drawn Movie Posters"
           description="Generate stunning AI-powered movie posters."
           image="https://imagizer.imageshack.com/img922/5329/T8F4aL.png"
-          link="/workflows/movie-poster"
+          link="/workflows/HandDrawnMoviePosters"
         />
         <WorkflowTile
           title="Retro Anime"
@@ -36,7 +36,7 @@ const GeneratePage = () => {
           title="Galactixy Illustrations"
           description="Folk art with a mystical touch."
           image="https://imagizer.imageshack.com/img922/8950/apStVx.png"
-          link="/workflows/GalactixyIllustrations"
+          link="/workflows/GalactixyIllistration"
         />
         <WorkflowTile
           title="Candid Photos"
@@ -49,6 +49,12 @@ const GeneratePage = () => {
           description="Realistic Images"
           image="https://imagizer.imageshack.com/img924/9959/euhyer.png"
           link="/workflows/cyberRealisticPonyV6"
+        />
+        <WorkflowTile
+          title="Claymation"
+          description="Create Clay Figures"
+          image="https://imagizer.imageshack.com/img922/5029/n1wB2D.png"
+          link="/workflows/Claymation"
         />
       </div>
     </div>

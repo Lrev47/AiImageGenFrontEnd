@@ -7,6 +7,12 @@ import Header from "./components/Header";
 import GeneratePage from "./components/GeneratePage";
 import MidJourneyV61Page from "./pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page";
 import CyberRealisticPonyV6 from "./pages/ComfyBundle1/CyberRealisticPonyV6.5/cyberRealisticPony";
+import CandidPhotos from "./pages/FluxDevWorkflows/CandidPhotos/CandidPhotos";
+import GalactixyIllistration from "./pages/FluxDevWorkflows/GalactixyIllistration/GalactixyIllistration";
+import HandDrawnMoviePosters from "./pages/FluxDevWorkflows/HandDrawnMoviePosters/HandDrawnMoviePosters";
+import RetroAnime from "./pages/FluxDevWorkflows/RetroAnime/RetroAnime";
+import Claymation from "./pages/FluxDevWorkflows/Claymation/Claymation";
+
 // Import other workflow pages as you create them
 // import AnotherWorkflowPage from "./pages/FluxDevWorkflows/AnotherWorkflow/anotherWorkflowPage.jsx";
 import { store } from "../store";
@@ -35,6 +41,17 @@ const App = () => {
           path="/workflows/cyberRealisticPonyV6"
           element={<CyberRealisticPonyV6 />}
         />
+        <Route path="/workflows/CandidPhotos" element={<CandidPhotos />} />
+        <Route
+          path="/workflows/GalactixyIllistration"
+          element={<GalactixyIllistration />}
+        />
+        <Route
+          path="/workflows/HandDrawnMoviePosters"
+          element={<HandDrawnMoviePosters />}
+        />
+        <Route path="/workflows/RetroAnime" element={<RetroAnime />} />
+        <Route path="/workflows/Claymation" element={<Claymation />} />
         {/* Add more workflow routes here */}
         {/* <Route path="/workflows/anotherWorkflow" element={<AnotherWorkflowPage />} /> */}
 
