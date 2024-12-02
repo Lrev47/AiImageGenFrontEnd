@@ -30,11 +30,7 @@ const RetroAnime = () => {
 
   // Define fixed parts of the prompt
   const FIXED_PROMPT = `
-    The image is a digital illustration in a detailed, vibrant, high contrast, semi-realistic art style with 90s retro futuristic anime elements without noise or comic halftone effect.
-    The subject is a woman with dark shoulder-length hair and green eyes. Her face shows a serious expression.
-    The theme of her body is a vivid red. Her body is slender and athletic. Her body is cyborg with mechanical parts integrated into it.
-    Her arms and chest are fully mechanical. She is wearing a red futuristic, cybernetic, high-tech suit reminiscent of military or space gear.
-    The background features a greenish, dark, abandoned, industrial setting with metallic pipes and machinery, creating a sense of a dystopian or sci-fi environment.
+    The image is a digital illustration in a detailed, vibrant, high contrast, semi-realistic art style with 90s retro futuristic anime elements without noise or comic halftone effect. a sense of a dystopian or sci-fi environment.
     The composition and poses are dynamic with muted, slightly gritty textures enhancing the futuristic atmosphere.
   `;
 
