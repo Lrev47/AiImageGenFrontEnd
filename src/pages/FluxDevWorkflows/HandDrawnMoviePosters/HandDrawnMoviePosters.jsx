@@ -158,7 +158,7 @@ const HandDrawnMoviePosters = () => {
             type="text"
             value={dynamicText}
             onChange={(e) => setDynamicText(e.target.value)}
-            placeholder="Enter text (e.g., 'Coming Soon')"
+            placeholder="Coming Soon!"
             disabled={loading || !gpuReady}
           />
         </div>
