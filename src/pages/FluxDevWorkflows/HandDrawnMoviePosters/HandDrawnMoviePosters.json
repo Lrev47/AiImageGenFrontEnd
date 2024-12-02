@@ -118,7 +118,7 @@
       },
       "28": {
         "inputs": {
-          "string": "Poster art. A sultry girl with red lips. (text: \"Kiss\").\n\nrtropopCE style."
+          "string": "Poster art. A sultry girl with red lips. (text: \"Kiss\"). rtropopCE style."
         },
         "class_type": "String Literal",
         "_meta": {

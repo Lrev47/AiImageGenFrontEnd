@@ -28,9 +28,12 @@ const HandDrawnMoviePosters = () => {
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
 
+  // Dynamic text state
+  const [dynamicText, setDynamicText] = useState("");
+
   // Define fixed parts of the prompt
   const FIXED_PROMPT =
-    "Hand-drawn movie poster art, retro style, high-resolution.";
+    "Hand-drawn movie poster art, rtropopCE style, high-resolution.";
 
   // Model description
   const modelDescription = `
@@ -85,7 +88,8 @@ const HandDrawnMoviePosters = () => {
     try {
       const updatedData = JSON.parse(JSON.stringify(workflowData));
       const userPrompt = prompt.trim();
-      const combinedPrompt = `${userPrompt}\n\n${FIXED_PROMPT}`;
+      const dynamicPart = dynamicText ? `(text: \"${dynamicText}\")` : ""; // Add dynamic text if provided
+      const combinedPrompt = `${userPrompt}${dynamicPart}${FIXED_PROMPT}`;
       updatedData.input.workflow["28"].inputs.string = combinedPrompt;
 
       const randomSeed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
@@ -147,6 +151,17 @@ const HandDrawnMoviePosters = () => {
           placeholder="Type your prompt here..."
           disabled={loading || !gpuReady}
         />
+        <div className="dynamic-text-input">
+          <label htmlFor="dynamic-text-input">Dynamic Text (optional):</label>
+          <input
+            id="dynamic-text-input"
+            type="text"
+            value={dynamicText}
+            onChange={(e) => setDynamicText(e.target.value)}
+            placeholder="Enter text (e.g., 'Coming Soon')"
+            disabled={loading || !gpuReady}
+          />
+        </div>
         <button onClick={handleGenerateImage} disabled={loading || !gpuReady}>
           {loading ? "Generating..." : "Generate Image"}
         </button>
