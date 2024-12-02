@@ -29,7 +29,7 @@ const Claymation = () => {
   const [gpuReady, setGpuReady] = useState(false);
 
   // Define fixed parts of the prompt
-  const FIXED_PROMPT = "a claymation model of batman, ultra-high resolution";
+  const FIXED_PROMPT = "a claymation model, ultra-high resolution";
 
   // Model description
   const modelDescription = `
