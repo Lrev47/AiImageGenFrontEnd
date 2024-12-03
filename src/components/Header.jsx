@@ -19,7 +19,7 @@ const Header = () => {
         <Link to="/login" className="nav-button">
           Login
         </Link>
-        <Link to="/try-for-free" className="nav-button try-button">
+        <Link to="/future-plans" className="nav-button try-button">
           In Development
         </Link>
         <div className="menu-icon">

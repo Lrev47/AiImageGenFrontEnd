@@ -1,0 +1,33 @@
+/* src/pages/FuturePlans.css */
+
+.future-plans-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.future-plans-page h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.future-plans-page h2 {
+  font-size: 2em;
+  margin-top: 40px;
+}
+
+.future-plans-page p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+.future-plans-page ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.future-plans-page li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}

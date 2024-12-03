@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import LandingPage from "./components/LandingPage";
 import Header from "./components/Header";
+import Gallery from "./components/Gallery";
+import FuturePlans from "./components/FuturePlans";
 import GeneratePage from "./components/GeneratePage";
 import MidJourneyV61Page from "./pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page";
 import CyberRealisticPonyV6 from "./pages/ComfyBundle1/CyberRealisticPonyV6.5/cyberRealisticPony";
@@ -31,6 +33,12 @@ const App = () => {
 
         {/* Generate Page Route */}
         <Route path="/generate" element={<GeneratePage />} />
+
+        {/* Gallery Route */}
+        <Route path="/gallery" element={<Gallery />} />
+
+        {/* Future Plans Route */}
+        <Route path="/future-plans" element={<FuturePlans />} />
 
         {/* Dedicated Workflow Routes */}
         <Route

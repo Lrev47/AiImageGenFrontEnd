@@ -1,0 +1,16 @@
+/* src/pages/Gallery.css */
+
+.gallery-page {
+  text-align: center;
+  padding: 50px;
+}
+
+.gallery-page h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.gallery-page p {
+  font-size: 1.2em;
+  margin-bottom: 40px;
+}
