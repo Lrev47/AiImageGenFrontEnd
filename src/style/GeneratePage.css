@@ -1,9 +1,7 @@
-/* GeneratePage.css */
 .generate-page {
   background-color: #121212;
   color: #ffffff;
   padding: 40px;
-  text-align: center;
   min-height: 100vh;
 }
 
@@ -14,9 +12,84 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+/* New content layout */
+.content {
+  display: flex;
+}
+
+/* Adjusted filter section */
+.filter-section {
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+.filter-section.open {
+  width: 250px;
+}
+
+.filter-section.closed {
+  width: 50px;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  background-color: #e94057;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.filters {
+  padding: 10px;
+}
+
+.filter-section h2 {
+  margin-bottom: 10px;
+  color: #e94057;
+  font-size: 1.2em;
+}
+
+.tags-container {
+  margin-bottom: 20px;
+}
+
+.tag-button {
+  display: block;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.tag-button.selected {
+  background-color: #e94057;
+  color: #fff;
+}
+
+.tag-button:hover {
+  background-color: #555;
+}
+
+/* Adjusted workflow grid */
 .workflow-grid {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

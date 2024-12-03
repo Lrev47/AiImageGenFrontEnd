@@ -1,8 +1,8 @@
 /* WorkflowTile.css */
 .workflow-tile {
   position: relative;
-  width: 200px;
-  height: 250px;
+  width: 250px;
+  height: 300px;
   background: #1c1c1c;
   border-radius: 10px;
   overflow: hidden;
@@ -26,6 +26,7 @@
 
 .tile-content {
   padding: 10px;
+  text-align: center; /* Center the content horizontally */
 }
 
 .tile-title {
@@ -35,13 +36,16 @@
   background: linear-gradient(90deg, #e94057, #8a4de8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 5px; /* Add some spacing below the title */
 }
 
 .tile-description {
   font-size: 0.9em;
   color: rgba(255, 255, 255, 0.7);
   margin-top: 5px;
+  margin-bottom: 0; /* Remove default bottom margin */
 }
+
 .workflow-tile.retro-anime .tile-image {
   background-position: center bottom; /* Adjust as needed */
 }
