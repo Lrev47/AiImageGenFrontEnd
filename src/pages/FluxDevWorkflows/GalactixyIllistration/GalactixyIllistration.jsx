@@ -6,6 +6,7 @@ import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
 import "./GalactixyIllistration.css";
 import LoadingAnimation from "../../../components/LoadingAnimation";
+import LongLoadingAnimation from "../../../components/LongLoadingAmination"; // Imported LongLoadingAnimation
 
 /**
  * Renders the GalactixyIllistration Workflow Detail Page.
@@ -27,6 +28,7 @@ const GalactixyIllistration = () => {
 
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
+  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true); // Added isGpuWarmingUp state
 
   // Define fixed parts of the prompt
   const FIXED_PROMPT =
@@ -51,6 +53,7 @@ const GalactixyIllistration = () => {
     const warmupGPU = async () => {
       try {
         setError(null);
+        setIsGpuWarmingUp(true); // Start the loading animation
         const jobId = await startJob({ input: { action: "warmup" } }, false);
         const warmupResult = await pollJobStatus(jobId, false, 60, 5000);
         if (warmupResult && warmupResult.status === "GPU warmed up") {
@@ -61,6 +64,8 @@ const GalactixyIllistration = () => {
       } catch (err) {
         console.error("Error warming up GPU:", err);
         setError("Failed to warm up GPU. Please try again.");
+      } finally {
+        setIsGpuWarmingUp(false); // Stop the loading animation
       }
     };
     setGpuReady(false);
@@ -110,6 +115,14 @@ const GalactixyIllistration = () => {
     }
   };
 
+  // Handle image download
+  const handleDownloadImage = (image) => {
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "generated-image.png";
+    link.click();
+  };
+
   return (
     <div className="workflow-page">
       <h1 className="workflow-title">Galactixy Illistration</h1>
@@ -128,15 +141,17 @@ const GalactixyIllistration = () => {
           <p>No image generated yet</p>
         )}
       </div>
-      {!gpuReady && !error && (
-        <p className="gpu-status">GPU is warming up...</p>
-      )}
+
+      {/* GPU Status Indicator */}
+      {!gpuReady && !error && <LongLoadingAnimation duration={300000} />}
+
       {error && (
         <div className="error-container">
           <p className="error-message">{error}</p>
           <button onClick={() => setGpuReady(false)}>Retry Warm-Up</button>
         </div>
       )}
+
       <div className="prompt-inputs">
         <label htmlFor="prompt-input">Enter your prompt:</label>
         <input
@@ -151,6 +166,7 @@ const GalactixyIllistration = () => {
           {loading ? "Generating..." : "Generate Image"}
         </button>
       </div>
+
       <div className="carousel">
         <h3>Previously Generated Images</h3>
         <div className="carousel-images">
@@ -159,12 +175,32 @@ const GalactixyIllistration = () => {
           ) : (
             imageHistory.map((image, index) => (
               <div key={index} className="carousel-item">
-                <img src={image} alt={`Generated ${index}`} />
+                <img
+                  src={image}
+                  alt={`Generated ${index}`}
+                  className="carousel-image"
+                />
+                <div
+                  className="download-icon"
+                  onClick={() => handleDownloadImage(image)}
+                >
+                  {/* Add your download icon SVG or component here */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                    width="24px"
+                    height="24px"
+                  >
+                    <path d="M5 20h14v-2H5v2zM12 2L8.5 7h3V15h2V7h3L12 2z" />
+                  </svg>
+                </div>
               </div>
             ))
           )}
         </div>
       </div>
+
       <div className="workflow-info">
         <h3>About This Workflow</h3>
         <p>{modelDescription}</p>

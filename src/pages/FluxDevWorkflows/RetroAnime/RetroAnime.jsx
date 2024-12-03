@@ -1,11 +1,10 @@
-// src/pages/FluxDevWorkflows/RetroAnime/RetroAnime.jsx
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
 import "./RetroAnime.css";
 import LoadingAnimation from "../../../components/LoadingAnimation";
+import LongLoadingAnimation from "../../../components/LongLoadingAmination"; // Imported LongLoadingAnimation
 
 /**
  * Renders the RetroAnime Workflow Page.
@@ -27,43 +26,64 @@ const RetroAnime = () => {
 
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
+  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true); // Added isGpuWarmingUp state
 
   // Define fixed parts of the prompt
-  const FIXED_PROMPT = `
-    The image is a digital illustration in a detailed, vibrant, high contrast, semi-realistic art style with 90s retro futuristic anime elements without noise or comic halftone effect. a sense of a dystopian or sci-fi environment.
-    The composition and poses are dynamic with muted, slightly gritty textures enhancing the futuristic atmosphere.
-  `;
+  const FIXED_PROMPT = `The image is a digital illustration in a detailed, vibrant, high contrast, semi-realistic art style with 90s retro futuristic anime elements without noise or comic halftone effect. a sense of a dystopian or sci-fi environment.
+    The composition and poses are dynamic with muted, slightly gritty textures enhancing the futuristic atmosphere.`;
 
-  const modelDescription = `
-    Retro Anime Workflow leverages advanced Flux technology to generate stunning, semi-realistic anime-inspired art.
-    Key Features:
-    - High-resolution images
-    - Dynamic poses and compositions
-    - Integrated LoRA for enhanced retro-futuristic anime style
-  `;
+  const modelDescription = `Retro Anime Workflow leverages advanced Flux technology to generate stunning, semi-realistic anime-inspired art.
+        Key Features:
+        - High-resolution images
+        - Dynamic poses and compositions
+        - Integrated LoRA for enhanced retro-futuristic anime style`;
 
   useEffect(() => {
     dispatch(loadWorkflow(workflowId));
   }, [workflowId, dispatch]);
 
-  useEffect(() => {
-    const warmupGPU = async () => {
-      try {
-        setError(null);
-        const jobId = await startJob({ input: { action: "warmup" } }, false);
-        const warmupResult = await pollJobStatus(jobId, false, 60, 5000);
-        if (warmupResult && warmupResult.status === "GPU warmed up") {
-          setGpuReady(true);
-        } else {
-          throw new Error("Unexpected warm-up result.");
-        }
-      } catch (err) {
-        console.error("Error warming up GPU:", err);
-        setError("Failed to warm up GPU. Please try again.");
+  // Move warmupGPU outside useEffect
+  const warmupGPU = async () => {
+    try {
+      setError(null);
+      setIsGpuWarmingUp(true); // Start the loading animation
+      if (
+        !workflowData ||
+        !workflowData.input ||
+        !workflowData.input.workflow
+      ) {
+        setError("Workflow data is invalid. Please reload the page.");
+        return;
       }
-    };
+
+      // Use the existing workflowData to create a minimal warm-up job
+      const warmupData = JSON.parse(JSON.stringify(workflowData));
+      // Set a minimal prompt
+      warmupData.input.workflow["6"].inputs.text = "warmup";
+      // Set a random seed
+      const randomSeed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+      warmupData.input.workflow["25"].inputs.noise_seed = randomSeed;
+
+      const jobId = await startJob(warmupData, false);
+      const jobResult = await pollJobStatus(jobId, false, 60, 5000);
+
+      if (jobResult && jobResult.status === "success") {
+        setGpuReady(true);
+      } else {
+        throw new Error("Unexpected warm-up result.");
+      }
+    } catch (err) {
+      console.error("Error warming up GPU:", err);
+      setError("Failed to warm up GPU. Please try again.");
+    } finally {
+      setIsGpuWarmingUp(false); // Stop the loading animation
+    }
+  };
+
+  useEffect(() => {
     setGpuReady(false);
     warmupGPU();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePromptChange = (event) => {
@@ -107,6 +127,13 @@ const RetroAnime = () => {
     }
   };
 
+  const handleDownloadImage = (image) => {
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "generated-image.png";
+    link.click();
+  };
+
   return (
     <div className="workflow-page">
       <h1 className="workflow-title">Retro Anime</h1>
@@ -125,15 +152,18 @@ const RetroAnime = () => {
           <p>No image generated yet</p>
         )}
       </div>
-      {!gpuReady && !error && (
-        <p className="gpu-status">GPU is warming up...</p>
-      )}
+
+      {/* GPU Status Indicator */}
+      {isGpuWarmingUp && !error && <LongLoadingAnimation duration={300000} />}
+
       {error && (
         <div className="error-container">
           <p className="error-message">{error}</p>
-          <button onClick={() => setGpuReady(false)}>Retry Warm-Up</button>
+          <button onClick={warmupGPU}>Retry Warm-Up</button>
         </div>
       )}
+
+      {/* Prompt input section */}
       <div className="prompt-inputs">
         <label htmlFor="prompt-input">Enter your prompt:</label>
         <input
@@ -148,6 +178,8 @@ const RetroAnime = () => {
           {loading ? "Generating..." : "Generate Image"}
         </button>
       </div>
+
+      {/* Carousel for previously generated images */}
       <div className="carousel">
         <h3>Previously Generated Images</h3>
         <div className="carousel-images">
@@ -156,12 +188,33 @@ const RetroAnime = () => {
           ) : (
             imageHistory.map((image, index) => (
               <div key={index} className="carousel-item">
-                <img src={image} alt={`Generated ${index}`} />
+                <img
+                  src={image}
+                  alt={`Generated ${index}`}
+                  className="carousel-image"
+                />
+                <div
+                  className="download-icon"
+                  onClick={() => handleDownloadImage(image)}
+                >
+                  {/* Add your download icon SVG or component here */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                    width="24px"
+                    height="24px"
+                  >
+                    <path d="M5 20h14v-2H5v2zM12 2L8.5 7h3V15h2V7h3L12 2z" />
+                  </svg>
+                </div>
               </div>
             ))
           )}
         </div>
       </div>
+
+      {/* Workflow description */}
       <div className="workflow-info">
         <h3>About This Workflow</h3>
         <p>{modelDescription}</p>

@@ -6,10 +6,11 @@ import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
 import "./cyberRealisticPony.css";
 import LoadingAnimation from "../../../components/LoadingAnimation";
+import LongLoadingAnimation from "../../../components/LongLoadingAmination"; // Imported LongLoadingAnimation
 
 /**
- * Renders the cyberRealisticPonyV6 Detail Page.
- * @returns {JSX.Element} - The New Workflow Page component.
+ * Renders the CyberRealisticPonyV6 Detail Page.
+ * @returns {JSX.Element} - The CyberRealisticPonyV6 Page component.
  */
 const CyberRealisticPonyV6 = () => {
   const workflowId = "cyberRealisticPonyV6"; // Unique workflow ID
@@ -27,14 +28,15 @@ const CyberRealisticPonyV6 = () => {
 
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
+  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true); // Added isGpuWarmingUp state
 
   // Define fixed parts of the prompt (if any)
   const FIXED_PROMPT = "high detailed texture, photograph, realistic";
 
   // Define your model description here
   const modelDescription = `
-  CyberRealisticPonyV6.5 is an advanced AI model specialized in generating hyper-realistic images of cybernetic ponies. It combines the styles of futuristic cyberpunk aesthetics with the charm of equine figures, allowing you to create unique and captivating artwork.
-`;
+    CyberRealisticPonyV6.5 is an advanced AI model specialized in generating hyper-realistic images of cybernetic ponies. It combines the styles of futuristic cyberpunk aesthetics with the charm of equine figures, allowing you to create unique and captivating artwork.
+  `;
 
   // Load workflow data when the component mounts
   useEffect(() => {
@@ -45,6 +47,8 @@ const CyberRealisticPonyV6 = () => {
   useEffect(() => {
     const warmupGPU = async () => {
       try {
+        setError(null);
+        setIsGpuWarmingUp(true); // Start the loading animation
         // Send warm-up request using startJob
         const jobId = await startJob(
           {
@@ -62,15 +66,15 @@ const CyberRealisticPonyV6 = () => {
           setGpuReady(true);
         } else {
           console.error("Unexpected warm-up result:", warmupResult);
-          // Proceed to set GPU as ready even if the result is unexpected
-          setGpuReady(true);
+          setGpuReady(true); // Proceed to set GPU as ready
         }
       } catch (error) {
         console.error("Error warming up GPU:", error);
-        // Proceed to set GPU as ready even if an error occurred
-        setGpuReady(true);
+        setGpuReady(true); // Proceed to set GPU as ready even if an error occurred
         // Optionally, you can set an error message if you want to inform the user
         // setError("Error warming up GPU. Some functionalities may be limited.");
+      } finally {
+        setIsGpuWarmingUp(false); // Stop the loading animation
       }
     };
 
@@ -161,7 +165,7 @@ const CyberRealisticPonyV6 = () => {
 
   return (
     <div className="workflow-page">
-      <h1 className="workflow-title">cyberRealisticPonyV6</h1>
+      <h1 className="workflow-title">CyberRealisticPonyV6</h1>
 
       {/* Display generated image */}
       <div className="image-display">
@@ -181,8 +185,13 @@ const CyberRealisticPonyV6 = () => {
       </div>
 
       {/* GPU Status Indicator */}
-      {!gpuReady && !error && (
-        <p className="gpu-status">GPU is starting up. Please wait...</p>
+      {!gpuReady && !error && <LongLoadingAnimation duration={300000} />}
+
+      {error && (
+        <div className="error-container">
+          <p className="error-message">{error}</p>
+          <button onClick={() => setGpuReady(false)}>Retry Warm-Up</button>
+        </div>
       )}
 
       {/* Prompt input section */}

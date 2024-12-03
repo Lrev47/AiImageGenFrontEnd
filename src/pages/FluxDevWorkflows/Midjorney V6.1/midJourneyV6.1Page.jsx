@@ -6,6 +6,7 @@ import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
 import "./midJourneyV6.1Page.css";
 import LoadingAnimation from "../../../components/LoadingAnimation";
+import LongLoadingAnimation from "../../../components/LongLoadingAmination";
 
 /**
  * Renders the MidJourney V6.1 Workflow Detail Page.
@@ -24,6 +25,7 @@ const MidJourneyV61Page = () => {
   const [imageHistory, setImageHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true);
 
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
@@ -58,6 +60,8 @@ const MidJourneyV61Page = () => {
         },
       });
 
+      setIsGpuWarmingUp(true); // Set isGpuWarmingUp to true
+
       // Poll the job status until it's completed
       const warmupResult = await pollJobStatus(jobId, false, 60, 5000); // Corrected parameter order
 
@@ -70,6 +74,9 @@ const MidJourneyV61Page = () => {
     } catch (error) {
       console.error("Error warming up GPU:", error);
       setError("Error warming up GPU. Please wait and try again.");
+    } finally {
+      // Stop the loading animation regardless of success or error
+      setIsGpuWarmingUp(false);
     }
   };
 
@@ -180,9 +187,8 @@ const MidJourneyV61Page = () => {
       </div>
 
       {/* GPU Status Indicator */}
-      {!gpuReady && !error && (
-        <p className="gpu-status">GPU is starting up. Please wait...</p>
-      )}
+      {!gpuReady && !error && <LongLoadingAnimation duration={300000} />}
+
       {error && (
         <div className="error-container">
           <p className="error-message">{error}</p>
