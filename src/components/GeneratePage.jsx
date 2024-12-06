@@ -68,6 +68,64 @@ const GeneratePage = () => {
       workflowType: "Text to Image",
       styles: ["Claymation", "Figures"],
     },
+    // {
+    //   title: "Ancient Style City",
+    //   description: "Grand architecture blended with lush landscapes.",
+    //   image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+    //   link: "/workflows/AncientStyleCity",
+    //   workflowType: "Text to Image",
+    //   styles: ["Ancient", "Architectural", "Landscape"],
+    // },
+    // {
+    //   title: "Technical CAD Drawing",
+    //   description: "Generate technical CAD-style drawings.",
+    //   image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+    //   link: "/workflows/TechnicalCADDrawing",
+    //   workflowType: "Text to Image",
+    //   styles: ["Technical", "CAD", "Engineering"],
+    // },
+    {
+      title: "CyberDisplay",
+      description: "Cybernetic eye display with tactical interfaces.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/CyberDisplay",
+      workflowType: "Text to Image",
+      styles: ["Cyberpunk", "Technology", "Futuristic"],
+    },
+    {
+      title: "FrankBStyle",
+      description: "Pen-and-ink illustrations inspired by classic artists.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/FrankBStyle",
+      workflowType: "Text to Image",
+      styles: ["Pen-and-Ink", "Vintage", "Illustration"],
+    },
+    {
+      title: "Animaker",
+      description: "Generate high-quality anime-style character images.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/Animaker",
+      workflowType: "Text to Image",
+      styles: ["Anime", "Character Design", "Illustration"],
+    },
+    {
+      title: "PonyRealism",
+      description: "Realistic and artistic images with dynamic lighting.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/PonyRealism",
+      workflowType: "Text to Image",
+      styles: ["Realism", "Portrait", "Artistic"],
+    },
+    {
+      title: "StylizedAnime",
+      description:
+        "Generate artistic anime-style images with creative elements.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/StylizedAnime",
+      workflowType: "Text to Image",
+      styles: ["Anime", "Artistic", "Illustration"],
+    },
+
     // Add any additional workflows here
   ];
 
