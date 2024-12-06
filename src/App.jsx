@@ -14,6 +14,13 @@ import GalactixyIllistration from "./pages/FluxDevWorkflows/GalactixyIllistratio
 import HandDrawnMoviePosters from "./pages/FluxDevWorkflows/HandDrawnMoviePosters/HandDrawnMoviePosters";
 import RetroAnime from "./pages/FluxDevWorkflows/RetroAnime/RetroAnime";
 import Claymation from "./pages/FluxDevWorkflows/Claymation/Claymation";
+import AncientStyleCity from "./pages/FluxDevWorkflows/AncientStyleCity/AncientStyleCity.jsx";
+import TechnicalCADDrawing from "./pages/FluxDevWorkflows/AutoCad/TechnicalCADDrawing";
+import CyberDisplay from "./pages/FluxDevWorkflows/CyberDisplay/CyberDisplay";
+import FrankBStyle from "./pages/FluxDevWorkflows/FrankBStyle/FrankBStyle";
+import Animaker from "./pages/ComfyBundle1/Animaker/Animaker";
+import PonyRealism from "./pages/ComfyBundle1/PonyRealism/PonyRealism";
+import StylizedAnime from "./pages/ComfyBundle1/StylizedAnime/StylizedAnime";
 
 // Import other workflow pages as you create them
 // import AnotherWorkflowPage from "./pages/FluxDevWorkflows/AnotherWorkflow/anotherWorkflowPage.jsx";
@@ -45,6 +52,23 @@ const App = () => {
           path="/workflows/midJourneyV6.1"
           element={<MidJourneyV61Page />}
         />
+        <Route
+          path="/workflows/AncientStyleCity"
+          element={<AncientStyleCity />}
+        />
+        <Route
+          path="/workflows/TechnicalCADDrawing"
+          element={<TechnicalCADDrawing />}
+        />
+        <Route path="/workflows/Animaker" element={<Animaker />} />
+
+        <Route path="/workflows/CyberDisplay" element={<CyberDisplay />} />
+
+        <Route path="/workflows/FrankBStyle" element={<FrankBStyle />} />
+
+        <Route path="/workflows/PonyRealism" element={<PonyRealism />} />
+        <Route path="/workflows/StylizedAnime" element={<StylizedAnime />} />
+
         <Route
           path="/workflows/cyberRealisticPonyV6"
           element={<CyberRealisticPonyV6 />}
