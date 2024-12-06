@@ -25,10 +25,10 @@ const CyberRealisticPonyV6 = () => {
   const [imageHistory, setImageHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true);
 
   // GPU readiness state
   const [gpuReady, setGpuReady] = useState(false);
-  const [isGpuWarmingUp, setIsGpuWarmingUp] = useState(true); // Added isGpuWarmingUp state
 
   // Define fixed parts of the prompt (if any)
   const FIXED_PROMPT = "high detailed texture, photograph, realistic";
@@ -43,41 +43,43 @@ const CyberRealisticPonyV6 = () => {
     dispatch(loadWorkflow(workflowId));
   }, [workflowId, dispatch]);
 
+  // Define warmupGPU outside of useEffect
+  const warmupGPU = async () => {
+    try {
+      setError(null); // Clear any previous errors
+      // Send warm-up request using startJob
+      const jobId = await startJob(
+        {
+          input: {
+            action: "warmup",
+          },
+        },
+        true
+      );
+
+      setIsGpuWarmingUp(true); // Set isGpuWarmingUp to true
+
+      // Poll the job status until it's completed
+      const warmupResult = await pollJobStatus(jobId, true, 60, 5000); // Allow up to 5 minutes for warm-up
+
+      if (warmupResult && warmupResult.status === "GPU warmed up") {
+        setGpuReady(true);
+      } else {
+        console.error("Unexpected warm-up result:", warmupResult);
+        setError("Unexpected warm-up result. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error warming up GPU:", error);
+      setError("Error warming up GPU. Please wait and try again.");
+    } finally {
+      // Stop the loading animation regardless of success or error
+      setIsGpuWarmingUp(false);
+    }
+  };
+
   // Trigger GPU warm-up on page load
   useEffect(() => {
-    const warmupGPU = async () => {
-      try {
-        setError(null);
-        setIsGpuWarmingUp(true); // Start the loading animation
-        // Send warm-up request using startJob
-        const jobId = await startJob(
-          {
-            input: {
-              action: "warmup",
-            },
-          },
-          true // Use the non-flux endpoint
-        );
-
-        // Poll the job status until it's completed
-        const warmupResult = await pollJobStatus(jobId, true, 60, 5000); // Allow up to 5 minutes for warm-up
-
-        if (warmupResult && warmupResult.status === "GPU warmed up") {
-          setGpuReady(true);
-        } else {
-          console.error("Unexpected warm-up result:", warmupResult);
-          setGpuReady(true); // Proceed to set GPU as ready
-        }
-      } catch (error) {
-        console.error("Error warming up GPU:", error);
-        setGpuReady(true); // Proceed to set GPU as ready even if an error occurred
-        // Optionally, you can set an error message if you want to inform the user
-        // setError("Error warming up GPU. Some functionalities may be limited.");
-      } finally {
-        setIsGpuWarmingUp(false); // Stop the loading animation
-      }
-    };
-
+    setGpuReady(false); // Reset gpuReady to false when the component mounts
     warmupGPU();
   }, []);
 
@@ -190,7 +192,9 @@ const CyberRealisticPonyV6 = () => {
       {error && (
         <div className="error-container">
           <p className="error-message">{error}</p>
-          <button onClick={() => setGpuReady(false)}>Retry Warm-Up</button>
+          <button onClick={warmupGPU} disabled={loading}>
+            Retry Warm-up
+          </button>
         </div>
       )}
 
