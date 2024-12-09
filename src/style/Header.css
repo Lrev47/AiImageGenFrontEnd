@@ -70,3 +70,48 @@
   background-color: #ffffff;
   margin: 3px 0;
 }
+/* Responsive Adjustments */
+
+/* For mobile screens (phones) */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .website-title {
+    font-size: 1.4em;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .header-nav {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+  }
+
+  /* Remove large negative margins on nav buttons */
+  .nav-button {
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+
+  .try-button {
+    font-size: 0.9em;
+  }
+
+  /* Consider adjusting the menu-icon if needed */
+  .menu-icon {
+    margin-left: 0;
+  }
+
+  .menu-bar {
+    width: 20px;
+    height: 2px;
+  }
+}

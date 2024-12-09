@@ -190,7 +190,6 @@
     padding: 4px 8px;
   }
 
-  /* Adjust positions closer or stack them */
   .left-button-1,
   .left-button-2,
   .left-button-3 {
@@ -203,7 +202,6 @@
     right: 15% !important;
   }
 
-  /* Reduce animation distance or speed if desired */
   .nav-button {
     animation: none; /* Optional to reduce complexity on half-screen */
   }
@@ -214,6 +212,7 @@
   .landing-page {
     height: auto;
     padding: 20px;
+    text-align: center; /* Center content on mobile */
   }
 
   .nav-button {
@@ -224,7 +223,6 @@
     animation: none;
   }
 
-  /* Stack all buttons in a row or column */
   .left-button-1,
   .left-button-2,
   .left-button-3,
@@ -235,11 +233,6 @@
     left: auto;
     right: auto;
     top: auto;
-  }
-
-  /* For a simple layout, center them all */
-  .landing-page {
-    text-align: center;
   }
 
   .spline-model {
