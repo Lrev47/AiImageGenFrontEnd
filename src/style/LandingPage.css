@@ -207,22 +207,24 @@
   }
 }
 
-/* For mobile screens (phones) */
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .landing-page {
     height: auto;
     padding: 20px;
-    text-align: center; /* Center content on mobile */
+    text-align: center;
   }
 
+  /* On mobile, remove absolute positioning and animations */
   .nav-button {
-    font-size: 1em;
     position: static;
     display: inline-block;
     margin: 5px;
+    font-size: 1em;
     animation: none;
   }
 
+  /* Stack all buttons in a row, since they're no longer absolute */
   .left-button-1,
   .left-button-2,
   .left-button-3,
@@ -230,9 +232,10 @@
   .right-button-2,
   .right-button-3 {
     position: static;
+    top: auto;
     left: auto;
     right: auto;
-    top: auto;
+    margin: 5px;
   }
 
   .spline-model {
