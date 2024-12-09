@@ -71,21 +71,28 @@
 /* For mobile screens (phones) */
 @media (max-width: 600px) {
   .workflow-tile {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    height: auto; /* Let height adjust naturally */
+    width: calc(50% - 10px); /* Fit two tiles per row with a small gap */
+    height: 250px; /* Maintain tile height */
+    margin: 5px; /* Add spacing between tiles */
   }
 
   .tile-image {
-    height: 50%; /* Adjust image height proportionally */
+    height: 60%; /* Ensure the image stays proportional */
   }
 
   .tile-title {
-    font-size: 1em;
+    font-size: 1em; /* Slightly smaller font size */
   }
 
   .tile-description {
-    font-size: 0.8em;
+    font-size: 0.8em; /* Slightly smaller font size */
+  }
+
+  /* Ensure the grid container adjusts for smaller tiles */
+  .workflow-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Add spacing between tiles */
+    justify-content: center; /* Center the grid on the screen */
   }
 }
