@@ -31,3 +31,57 @@
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+/* Responsive Adjustments */
+
+/* For roughly half-screen (tablets or smaller desktops) */
+@media (max-width: 900px) {
+  .future-plans-page {
+    padding: 40px 15px;
+    max-width: 600px; /* Slightly narrower */
+  }
+
+  .future-plans-page h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .future-plans-page h2 {
+    font-size: 1.8em;
+    margin-top: 30px;
+  }
+
+  .future-plans-page p,
+  .future-plans-page li {
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+}
+
+/* For mobile screens (phones) */
+@media (max-width: 600px) {
+  .future-plans-page {
+    padding: 30px 10px;
+    max-width: 100%; /* Use full width */
+  }
+
+  .future-plans-page h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .future-plans-page h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+
+  .future-plans-page p,
+  .future-plans-page li {
+    font-size: 1em;
+    line-height: 1.4;
+  }
+
+  .future-plans-page ul {
+    margin-left: 15px;
+  }
+}

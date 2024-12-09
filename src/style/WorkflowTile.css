@@ -49,3 +49,43 @@
 .workflow-tile.retro-anime .tile-image {
   background-position: center bottom; /* Adjust as needed */
 }
+
+/* Responsive Adjustments */
+
+/* For roughly half-screen (tablets or smaller desktops) */
+@media (max-width: 900px) {
+  .workflow-tile {
+    width: 200px; /* Slightly smaller width */
+    height: 260px; /* Slightly smaller height */
+  }
+
+  .tile-title {
+    font-size: 1.1em;
+  }
+
+  .tile-description {
+    font-size: 0.85em;
+  }
+}
+
+/* For mobile screens (phones) */
+@media (max-width: 600px) {
+  .workflow-tile {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    height: auto; /* Let height adjust naturally */
+  }
+
+  .tile-image {
+    height: 50%; /* Adjust image height proportionally */
+  }
+
+  .tile-title {
+    font-size: 1em;
+  }
+
+  .tile-description {
+    font-size: 0.8em;
+  }
+}

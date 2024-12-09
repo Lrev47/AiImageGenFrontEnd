@@ -95,3 +95,40 @@
   justify-content: center;
   gap: 20px;
 }
+
+/* For mobile screens (phones) */
+@media (max-width: 600px) {
+  .generate-page {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  .content {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .filter-section {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+
+  .tag-button {
+    font-size: 0.8em;
+    padding: 6px 10px;
+  }
+
+  .workflow-grid {
+    gap: 10px;
+  }
+
+  .sidebar-toggle {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8em;
+  }
+}

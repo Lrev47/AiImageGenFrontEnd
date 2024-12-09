@@ -14,3 +14,37 @@
   font-size: 1.2em;
   margin-bottom: 40px;
 }
+
+/* For roughly half-screen (tablets or smaller desktops) */
+@media (max-width: 900px) {
+  .gallery-page {
+    padding: 40px 20px;
+  }
+
+  .gallery-page h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .gallery-page p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+}
+
+/* For mobile screens (phones) */
+@media (max-width: 600px) {
+  .gallery-page {
+    padding: 30px 10px;
+  }
+
+  .gallery-page h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+
+  .gallery-page p {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+}
