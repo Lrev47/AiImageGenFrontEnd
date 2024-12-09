@@ -71,9 +71,9 @@
 /* For mobile screens (phones) */
 @media (max-width: 600px) {
   .workflow-tile {
-    width: calc(50% - 10px); /* Fit two tiles per row with a small gap */
+    width: calc(25% - 10px); /* Fit two tiles per row with a small gap */
     height: 250px; /* Maintain tile height */
-    margin: 5px; /* Add spacing between tiles */
+    margin: 2px; /* Add spacing between tiles */
   }
 
   .tile-image {
