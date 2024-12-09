@@ -208,7 +208,6 @@
 }
 
 @media (max-width: 600px) {
-
   .left-button-1,
   .left-button-2,
   .left-button-3 {
@@ -220,3 +219,4 @@
   .right-button-3 {
     right: 8% !important;
   }
+}
