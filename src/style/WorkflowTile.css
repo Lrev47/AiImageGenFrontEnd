@@ -73,7 +73,7 @@
   .workflow-tile {
     width: calc(25% - 10px); /* Fit two tiles per row with a small gap */
     height: 250px; /* Maintain tile height */
-    margin: 2px; /* Add spacing between tiles */
+    margin: 0; /* Add spacing between tiles */
   }
 
   .tile-image {
@@ -81,11 +81,11 @@
   }
 
   .tile-title {
-    font-size: 1em; /* Slightly smaller font size */
+    font-size: 0.8em; /* Slightly smaller font size */
   }
 
   .tile-description {
-    font-size: 0.8em; /* Slightly smaller font size */
+    font-size: 0.5em; /* Slightly smaller font size */
   }
 
   /* Ensure the grid container adjusts for smaller tiles */
