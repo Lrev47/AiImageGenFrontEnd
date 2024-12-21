@@ -1,0 +1,148 @@
+{
+  "input": {
+    "workflow": {
+      "5": {
+        "inputs": {
+          "width": 1024,
+          "height": 1280,
+          "batch_size": 1,
+          "overlap": 64
+        },
+        "class_type": "EmptyLatentImage",
+        "_meta": {
+          "title": "Empty Latent Image"
+        }
+      },
+      "10": {
+        "inputs": {
+          "vae_name": "FLUX1/ae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "Load VAE"
+        }
+      },
+      "11": {
+        "inputs": {
+          "clip_name1": "t5xxl_fp16.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "type": "flux"
+        },
+        "class_type": "DualCLIPLoader",
+        "_meta": {
+          "title": "DualCLIPLoader"
+        }
+      },
+      "12": {
+        "inputs": {
+          "unet_name": "flux1-dev-F16.gguf"
+        },
+        "class_type": "UnetLoaderGGUF",
+        "_meta": {
+          "title": "Unet Loader (GGUF)"
+        }
+      },
+      "32": {
+        "inputs": {
+          "text": "A technical CAD drawing of an old airplane",
+          "clip": ["11", 0]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Prompt)"
+        }
+      },
+      "43": {
+        "inputs": {
+          "text": "",
+          "clip": ["11", 0]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Prompt)"
+        }
+      },
+      "44": {
+        "inputs": {
+          "conditioning": ["43", 0]
+        },
+        "class_type": "ConditioningZeroOut",
+        "_meta": {
+          "title": "ConditioningZeroOut"
+        }
+      },
+      "46": {
+        "inputs": {
+          "factor": 1.25,
+          "interpolation_mode": "bilinear",
+          "image": ["48", 0]
+        },
+        "class_type": "JWImageResizeByFactor",
+        "_meta": {
+          "title": "Image Resize by Factor"
+        }
+      },
+      "48": {
+        "inputs": {
+          "amount": 0.38,
+          "image": ["85", 0]
+        },
+        "class_type": "ImageCASharpening+",
+        "_meta": {
+          "title": "🔧 Image Contrast Adaptive Sharpening"
+        }
+      },
+      "59": {
+        "inputs": {
+          "lora_name": "cad.safetensors",
+          "strength_model": 1,
+          "model": ["12", 0]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "83": {
+        "inputs": {
+          "filename_prefix": "ComfyUI",
+          "images": ["46", 0]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "Save Image"
+        }
+      },
+      "84": {
+        "inputs": {
+          "seed": 665331390693673,
+          "steps": 26,
+          "cfg": 1,
+          "sampler_name": "euler",
+          "scheduler": "beta",
+          "denoise": 1,
+          "model": ["59", 0],
+          "positive": ["32", 0],
+          "negative": ["44", 0],
+          "latent_image": ["5", 0]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "85": {
+        "inputs": {
+          "tile_size": 512,
+          "samples": ["84", 0],
+          "vae": ["10", 0],
+          "overlap": 64
+        },
+        "class_type": "VAEDecodeTiled",
+        "_meta": {
+          "title": "VAE Decode (Tiled)"
+        }
+      }
+    }
+  }
+}

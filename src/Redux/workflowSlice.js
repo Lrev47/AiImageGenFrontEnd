@@ -10,26 +10,24 @@ console.log("workflowModules keys:", Object.keys(workflowModules));
 
 // Mapping of workflowId to module path (keys in workflowModules)
 const workflowModuleMap = {
-  midJourneyV6_1:
-    "../pages/FluxDevWorkflows/Midjorney V6.1/midJourneyV6.1Page.json",
+  midJourneyV6_1: "../pages/batch1/Midjorney V6.1/midJourneyV6.1Page.json",
   cyberRealisticPonyV6:
-    "../pages/ComfyBundle1/CyberRealisticPonyV6.5/cyberRealisticPony.json",
-  CandidPhotos: "../pages/FluxDevWorkflows/CandidPhotos/CandidPhotos.json",
-  Claymation: "../pages/FluxDevWorkflows/Claymation/Claymation.json",
+    "../pages/batch1/CyberRealisticPonyV6.5/cyberRealisticPony.json",
+  CandidPhotos: "../pages/batch1/CandidPhotos/CandidPhotos.json",
+  Claymation: "../pages/batch1/Claymation/Claymation.json",
   GalactixyIllistration:
-    "../pages/FluxDevWorkflows/GalactixyIllistration/GalactixyIllistration.json",
+    "../pages/batch1/GalactixyIllistration/GalactixyIllistration.json",
   HandDrawnMoviePosters:
-    "../pages/FluxDevWorkflows/HandDrawnMoviePosters/HandDrawnMoviePosters.json",
-  RetroAnime: "../pages/FluxDevWorkflows/RetroAnime/RetroAnime.json",
+    "../pages/batch1/HandDrawnMoviePosters/HandDrawnMoviePosters.json",
+  RetroAnime: "../pages/batch1/RetroAnime/RetroAnime.json",
   AncientStyleCity:
-    "../pages/FluxDevWorkflows/AincentLandscapes/AncientStyleCity.json",
-  TechnicalCADDrawing:
-    "../pages/FluxDevWorkflows/TechnicalCADDrawing/TechnicalCADDrawing.json",
-  CyberDisplay: "../pages/FluxDevWorkflows/CyberDisplay/CyberDisplay.json",
-  FrankBStyle: "../pages/FluxDevWorkflows/FrankBStyle/FrankBStyle.json",
-  Animaker: "../pages/ComfyBundle1/Animaker/Animaker.json",
-  PonyRealism: "../pages/ComfyBundle1/PonyRealism/PonyRealism.json",
-  StylizedAnime: "../pages/ComfyBundle1/StylizedAnime/StylizedAnime.json",
+    "../pages/batch1 / AncientStyleCity / AncientStyleCity.json;",
+  TechnicalCADDrawing: "../pages/batch1/AutoCad/TechnicalCADDrawing.json",
+  CyberDisplay: "../pages/batch1/CyberDisplay/CyberDisplay.json",
+  FrankBStyle: "../pages/batch1/FrankBStyle/FrankBStyle.json",
+  Animaker: "../pages/batch1/Animaker/Animaker.json",
+  PonyRealism: "../pages/batch1/PonyRealism/PonyRealism.json",
+  StylizedAnime: "../pages/batch1/StylizedAnime/StylizedAnime.json",
 
   // Add other workflows here
 };
