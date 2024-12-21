@@ -2,19 +2,16 @@
 
 const RUNPOD_URL = import.meta.env.VITE_RUNPOD_URL;
 const RUNPOD_TOKEN = import.meta.env.VITE_RUNPOD_TOKEN;
-const RUNPOD_NONFLUX_URL = import.meta.env.VITE_RUNPOD_NONFLUX_URL;
 
 /**
  * Starts a job by sending workflow data to the RunPod API.
  * @param {Object} workflowData - The workflow configuration data.
- * @param {boolean} isNonFlux - Flag to use the non-flux endpoint.
  * @returns {Promise<string>} - The job ID returned by the API.
  */
-export const startJob = async (workflowData, isNonFlux = false) => {
+
+export const startJob = async (workflowData) => {
   try {
-    const apiUrl = isNonFlux
-      ? `${RUNPOD_NONFLUX_URL}/run`
-      : `${RUNPOD_URL}/run`;
+    const apiUrl = `${RUNPOD_URL}/run`;
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -41,25 +38,23 @@ export const startJob = async (workflowData, isNonFlux = false) => {
 /**
  * Polls the job status until completion or until maximum retries are reached.
  * @param {string} jobId - The ID of the job to poll.
- * @param {boolean} isNonFlux - Flag to use the non-flux endpoint.
  * @param {number} [maxRetries=60] - Maximum number of retries.
  * @param {number} [retryDelay=5000] - Delay between retries in milliseconds.
  * @returns {Promise<any>} - The output data returned by the job.
  */
+
 export const pollJobStatus = async (
   jobId,
-  isNonFlux = false,
   maxRetries = 60,
   retryDelay = 5000
 ) => {
   try {
-    const apiUrl = isNonFlux ? RUNPOD_NONFLUX_URL : RUNPOD_URL;
     let isCompleted = false;
     let outputData = null;
     let retries = 0;
 
     while (!isCompleted && retries < maxRetries) {
-      const response = await fetch(`${apiUrl}/status/${jobId}`, {
+      const response = await fetch(`${RUNPOD_URL}/status/${jobId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${RUNPOD_TOKEN}`,
