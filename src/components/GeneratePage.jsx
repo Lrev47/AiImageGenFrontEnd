@@ -68,22 +68,22 @@ const GeneratePage = () => {
       workflowType: "Text to Image",
       styles: ["Claymation", "Figures"],
     },
-    // {
-    //   title: "Ancient Style City",
-    //   description: "Grand architecture blended with lush landscapes.",
-    //   image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
-    //   link: "/workflows/AncientStyleCity",
-    //   workflowType: "Text to Image",
-    //   styles: ["Ancient", "Architectural", "Landscape"],
-    // },
-    // {
-    //   title: "Technical CAD Drawing",
-    //   description: "Generate technical CAD-style drawings.",
-    //   image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg",
-    //   link: "/workflows/TechnicalCADDrawing",
-    //   workflowType: "Text to Image",
-    //   styles: ["Technical", "CAD", "Engineering"],
-    // },
+    {
+      title: "Ancient Style City",
+      description: "Grand architecture blended with lush landscapes.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
+      link: "/workflows/AncientStyleCity",
+      workflowType: "Text to Image",
+      styles: ["Ancient", "Architectural", "Landscape"],
+    },
+    {
+      title: "Technical CAD Drawing",
+      description: "Generate technical CAD-style drawings.",
+      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg",
+      link: "/workflows/TechnicalCADDrawing",
+      workflowType: "Text to Image",
+      styles: ["Technical", "CAD", "Engineering"],
+    },
     {
       title: "CyberDisplay",
       description: "Cybernetic eye display with tactical interfaces.",
