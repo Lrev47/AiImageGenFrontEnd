@@ -20,8 +20,7 @@ const workflowModuleMap = {
   HandDrawnMoviePosters:
     "../pages/batch1/HandDrawnMoviePosters/HandDrawnMoviePosters.json",
   RetroAnime: "../pages/batch1/RetroAnime/RetroAnime.json",
-  AncientStyleCity:
-    "../pages/batch1 / AncientStyleCity / AncientStyleCity.json;",
+  AncientStyleCity: "../pages/batch1/AncientStyleCity/AncientStyleCity.json",
   TechnicalCADDrawing: "../pages/batch1/AutoCad/TechnicalCADDrawing.json",
   CyberDisplay: "../pages/batch1/CyberDisplay/CyberDisplay.json",
   FrankBStyle: "../pages/batch1/FrankBStyle/FrankBStyle.json",

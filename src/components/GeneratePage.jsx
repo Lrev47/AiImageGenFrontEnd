@@ -68,18 +68,18 @@ const GeneratePage = () => {
       workflowType: "Text to Image",
       styles: ["Claymation", "Figures"],
     },
-    // {
-    //   title: "Ancient Style City",
-    //   description: "Grand architecture blended with lush landscapes.",
-    //   image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg", // Replace with actual image URL
-    //   link: "/workflows/AncientStyleCity",
-    //   workflowType: "Text to Image",
-    //   styles: ["Ancient", "Architectural", "Landscape"],
-    // },
+    {
+      title: "Ancient Style City",
+      description: "Grand architecture blended with lush landscapes.",
+      image: "https://imagizer.imageshack.com/img922/1302/E6XGlb.png",
+      link: "/workflows/AncientStyleCity",
+      workflowType: "Text to Image",
+      styles: ["Ancient", "Architectural", "Landscape"],
+    },
     {
       title: "Technical CAD Drawing",
       description: "Generate technical CAD-style drawings.",
-      image: "https://imagizer.imageshack.com/img924/8295/gWa7t8.jpg",
+      image: "https://imagizer.imageshack.com/img922/7416/UjUQFf.png",
       link: "/workflows/TechnicalCADDrawing",
       workflowType: "Text to Image",
       styles: ["Technical", "CAD", "Engineering"],
@@ -177,7 +177,7 @@ const GeneratePage = () => {
 
   return (
     <div className="generate-page">
-      <h1 className="page-title">Choose Your Workflow</h1>
+      <h1 className="page-title">Workflows</h1>
       <div className="content">
         <div className={`filter-section ${isSidebarOpen ? "open" : "closed"}`}>
           <div className="sidebar-toggle" onClick={toggleSidebar}>
