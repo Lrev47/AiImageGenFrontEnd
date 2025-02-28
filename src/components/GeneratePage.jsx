@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/GeneratePage.css";
 import WorkflowTile from "./WorkflowTile";
-import { FaFilter, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaFilter, FaChevronLeft, FaChevronRight, FaTags } from "react-icons/fa";
 
 /**
  * Renders the Generate Page with a grid of workflow options.
@@ -129,20 +129,22 @@ const GeneratePage = () => {
     // Add any additional workflows here
   ];
 
-  // Generate unique workflow types and style tags
-  const workflowTypes = Array.from(
-    new Set(workflows.map((w) => w.workflowType))
-  );
-  const styleTags = Array.from(new Set(workflows.flatMap((w) => w.styles)));
-
-  // State to keep track of selected filters
+  // State for filters and sidebar
   const [selectedWorkflowTypes, setSelectedWorkflowTypes] = useState([]);
   const [selectedStyles, setSelectedStyles] = useState([]);
-
-  // State for sidebar collapse
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activeFilterCount, setActiveFilterCount] = useState(0);
 
-  // Functions to handle tag selection
+  // Extract unique workflow types and styles
+  const workflowTypes = [...new Set(workflows.map((w) => w.workflowType))];
+  const allStyles = workflows.flatMap((w) => w.styles);
+  const styleTags = [...new Set(allStyles)].sort();
+
+  // Update active filter count when selections change
+  useEffect(() => {
+    setActiveFilterCount(selectedWorkflowTypes.length + selectedStyles.length);
+  }, [selectedWorkflowTypes, selectedStyles]);
+
   const handleWorkflowTypeClick = (type) => {
     if (selectedWorkflowTypes.includes(type)) {
       setSelectedWorkflowTypes(selectedWorkflowTypes.filter((t) => t !== type));
@@ -159,6 +161,12 @@ const GeneratePage = () => {
     }
   };
 
+  // Clear all filters
+  const clearAllFilters = () => {
+    setSelectedWorkflowTypes([]);
+    setSelectedStyles([]);
+  };
+
   // Function to toggle sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -171,7 +179,7 @@ const GeneratePage = () => {
       selectedWorkflowTypes.includes(workflow.workflowType);
     const matchesStyle =
       selectedStyles.length === 0 ||
-      selectedStyles.some((style) => workflow.styles.includes(style));
+      workflow.styles.some((style) => selectedStyles.includes(style));
     return matchesType && matchesStyle;
   });
 
@@ -182,10 +190,20 @@ const GeneratePage = () => {
         <div className={`filter-section ${isSidebarOpen ? "open" : "closed"}`}>
           <div className="sidebar-toggle" onClick={toggleSidebar}>
             {isSidebarOpen ? <FaChevronLeft /> : <FaFilter />}
+            {!isSidebarOpen && activeFilterCount > 0 && (
+              <span className="filter-badge">{activeFilterCount}</span>
+            )}
           </div>
           {isSidebarOpen && (
             <div className="filters">
-              <h2>Workflow Type</h2>
+              <div className="filter-header">
+                <h2>Workflow Type</h2>
+                {selectedWorkflowTypes.length > 0 && (
+                  <button className="clear-filter" onClick={() => setSelectedWorkflowTypes([])}>
+                    Clear
+                  </button>
+                )}
+              </div>
               <div className="tags-container">
                 {workflowTypes.map((type) => (
                   <button
@@ -199,7 +217,15 @@ const GeneratePage = () => {
                   </button>
                 ))}
               </div>
-              <h2>Style</h2>
+              
+              <div className="filter-header">
+                <h2>Style</h2>
+                {selectedStyles.length > 0 && (
+                  <button className="clear-filter" onClick={() => setSelectedStyles([])}>
+                    Clear
+                  </button>
+                )}
+              </div>
               <div className="tags-container">
                 {styleTags.map((style) => (
                   <button
@@ -213,20 +239,38 @@ const GeneratePage = () => {
                   </button>
                 ))}
               </div>
+              
+              {activeFilterCount > 0 && (
+                <button className="clear-all-button" onClick={clearAllFilters}>
+                  Clear All Filters
+                </button>
+              )}
             </div>
           )}
         </div>
         <div className="workflow-grid">
-          {filteredWorkflows.map((workflow) => (
-            <WorkflowTile
-              key={workflow.title}
-              title={workflow.title}
-              description={workflow.description}
-              image={workflow.image}
-              link={workflow.link}
-              className={workflow.className}
-            />
-          ))}
+          {filteredWorkflows.length > 0 ? (
+            filteredWorkflows.map((workflow) => (
+              <WorkflowTile
+                key={workflow.title}
+                title={workflow.title}
+                description={workflow.description}
+                image={workflow.image}
+                link={workflow.link}
+                className={workflow.className}
+                tags={workflow.styles}
+              />
+            ))
+          ) : (
+            <div className="no-results">
+              <FaTags size={40} />
+              <h3>No workflows match your filters</h3>
+              <p>Try adjusting your filter selections or clearing filters</p>
+              <button className="clear-all-button" onClick={clearAllFilters}>
+                Clear All Filters
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

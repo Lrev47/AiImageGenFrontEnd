@@ -1,209 +1,223 @@
 /* LandingPage.css */
 
-/* Import the sleek font */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+/* Import fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap");
 
 .landing-page {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  font-family: "Roboto", sans-serif;
-  background-color: #000;
+  font-family: "Inter", sans-serif;
+  background-color: var(--darker-bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(233, 64, 87, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(138, 77, 232, 0.12) 0%, transparent 25%);
 }
 
-/* Floating animations with varied movements */
+/* Enhanced floating animations with varied movements */
 @keyframes float1 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
   }
   25% {
-    transform: translate(5px, -10px);
+    transform: translate(5px, -10px) rotate(1deg);
   }
   50% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
   }
   75% {
-    transform: translate(-5px, 10px);
+    transform: translate(-5px, 10px) rotate(-1deg);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
 @keyframes float2 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   25% {
-    transform: translate(-5px, -10px);
+    transform: translate(-8px, -12px) rotate(-1deg) scale(1.02);
   }
   50% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   75% {
-    transform: translate(5px, 10px);
+    transform: translate(8px, 12px) rotate(1deg) scale(0.98);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
 }
 
 @keyframes float3 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
+    filter: brightness(1);
   }
-  25% {
-    transform: translate(3px, -15px);
+  33% {
+    transform: translate(-10px, 15px) rotate(-1.5deg);
+    filter: brightness(1.1);
   }
-  50% {
-    transform: translate(0, 0);
-  }
-  75% {
-    transform: translate(-3px, 15px);
+  66% {
+    transform: translate(10px, -15px) rotate(1.5deg);
+    filter: brightness(0.9);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
+    filter: brightness(1);
   }
 }
 
 @keyframes float4 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
+    filter: hue-rotate(0deg);
   }
   25% {
-    transform: translate(8px, -5px);
+    transform: translate(12px, -12px) scale(1.03);
+    filter: hue-rotate(5deg);
   }
   50% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
+    filter: hue-rotate(0deg);
   }
   75% {
-    transform: translate(-8px, 5px);
+    transform: translate(-12px, 12px) scale(0.97);
+    filter: hue-rotate(-5deg);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
+    filter: hue-rotate(0deg);
   }
 }
 
-/* Common styles for all nav buttons */
+/* Glowing pulse */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(138, 77, 232, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(233, 64, 87, 0.5), 0 0 30px rgba(138, 77, 232, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(138, 77, 232, 0.3);
+  }
+}
+
 .nav-button {
-  position: absolute;
-  z-index: 2;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 1.5em;
-  font-weight: 500;
-  padding: 5px 10px;
-  transition: all 0.3s ease;
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 4px;
-  animation-play-state: running;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 12px 24px;
+  margin: 12px;
+  background-color: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(138, 77, 232, 0.2);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  animation: glow 3s infinite;
+  z-index: 10;
 }
 
-/* Underline effect on hover */
 .nav-button:hover {
-  text-decoration: underline;
-  background-color: rgba(255, 255, 255, 0.1);
-  animation-play-state: paused;
+  transform: translateY(-5px);
+  background-color: rgba(65, 67, 106, 0.8);
+  border-color: rgba(233, 64, 87, 0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Left Side Buttons */
 .left-button-1 {
-  top: 30%;
-  left: 27%;
-  animation: float1 4s ease-in-out infinite;
-  animation-delay: 0s;
+  position: absolute;
+  left: 5%;
+  top: 20%;
+  animation: float1 8s ease-in-out infinite;
 }
 
 .left-button-2 {
+  position: absolute;
+  left: 10%;
   top: 50%;
-  left: 20%;
-  animation: float2 5s ease-in-out infinite;
-  animation-delay: 0.2s;
+  animation: float2 10s ease-in-out infinite;
 }
 
 .left-button-3 {
-  top: 70%;
-  left: 27%;
-  animation: float3 4.5s ease-in-out infinite;
-  animation-delay: 0.4s;
+  position: absolute;
+  left: 5%;
+  bottom: 20%;
+  animation: float3 12s ease-in-out infinite;
 }
 
-/* Right Side Buttons */
 .right-button-1 {
-  top: 30%;
-  right: 27%;
-  animation: float2 4.8s ease-in-out infinite;
-  animation-delay: 0.1s;
+  position: absolute;
+  right: 5%;
+  top: 20%;
+  animation: float4 9s ease-in-out infinite;
 }
 
 .right-button-2 {
+  position: absolute;
+  right: 10%;
   top: 50%;
-  right: 20%;
-  animation: float4 5.2s ease-in-out infinite;
-  animation-delay: 0.3s;
+  animation: float1 11s ease-in-out infinite;
 }
 
 .right-button-3 {
-  top: 70%;
-  right: 27%;
-  animation: float3 4.2s ease-in-out infinite;
-  animation-delay: 0.5s;
+  position: absolute;
+  right: 5%;
+  bottom: 20%;
+  animation: float2 13s ease-in-out infinite;
 }
 
-/* Spline model styles */
 .spline-model {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  z-index: 1;
+  pointer-events: none;
+  z-index: 5;
 }
 
-/* Responsive adjustments for large screens */
+/* Responsive design */
 @media (min-width: 1200px) {
-  .left-button-1,
-  .left-button-3 {
-    left: 30%;
-  }
-
-  .right-button-1,
-  .right-button-3 {
-    right: 30%;
-  }
-}
-
-.left-button-2 {
-  left: 20%;
-}
-.right-button-2 {
-  right: 20%;
-}
-
-/* Responsive Adjustments */
-
-/* For roughly half-screen (tablets or smaller desktops) */
-@media (max-width: 900px) {
-  .nav-button {
-    font-size: 1.2em;
-    padding: 4px 8px;
-  }
-
   .left-button-1,
   .left-button-2,
   .left-button-3 {
-    left: 15% !important;
+    left: 15%;
   }
 
   .right-button-1,
   .right-button-2,
   .right-button-3 {
-    right: 15% !important;
+    right: 15%;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 8px;
   }
 
-  .nav-button {
-    animation: none; /* Optional to reduce complexity on half-screen */
+  .left-button-1,
+  .left-button-2,
+  .left-button-3 {
+    left: 5%;
+  }
+
+  .right-button-1,
+  .right-button-2,
+  .right-button-3 {
+    right: 5%;
   }
 }
 
@@ -211,12 +225,18 @@
   .left-button-1,
   .left-button-2,
   .left-button-3 {
-    left: 35% !important;
+    left: 2%;
   }
 
   .right-button-1,
   .right-button-2,
   .right-button-3 {
-    right: 35% !important;
+    right: 2%;
+  }
+
+  .nav-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
   }
 }
+

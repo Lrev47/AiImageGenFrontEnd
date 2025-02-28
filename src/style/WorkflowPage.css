@@ -1,0 +1,380 @@
+/* src/style/WorkflowPage.css */
+/* Common styles for all workflow pages */
+
+.workflow-page {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  background-color: var(--darker-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+}
+
+.workflow-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(233, 64, 87, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(138, 77, 232, 0.08) 0%, transparent 40%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.workflow-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+  word-break: break-word; /* Prevent overflow on small screens */
+}
+
+/* Image display area */
+.image-display {
+  width: 100%;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  z-index: 1;
+}
+
+.generated-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.generated-image:hover {
+  transform: scale(1.02);
+}
+
+/* Prompt inputs section */
+.prompt-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.prompt-inputs label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.prompt-inputs input {
+  padding: 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+.prompt-inputs input:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px rgba(138, 77, 232, 0.2);
+}
+
+.prompt-inputs button {
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+.prompt-inputs button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.prompt-inputs button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.prompt-inputs button:active {
+  transform: translateY(1px); /* Provide feedback on touch */
+}
+
+/* Error messaging */
+.error-message {
+  color: rgba(233, 64, 87, 0.9);
+  text-align: center;
+  font-weight: 500;
+  padding: 0 15px; /* Add padding for mobile */
+  word-break: break-word; /* Handle long error messages */
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(233, 64, 87, 0.05);
+  border: 1px solid rgba(233, 64, 87, 0.2);
+}
+
+.error-container button {
+  padding: 10px 20px; /* Larger touch target */
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-height: 44px; /* Minimum touch target size */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.error-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.error-container button:active {
+  transform: translateY(1px);
+}
+
+/* Carousel for image history */
+.carousel {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.carousel-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.carousel-item {
+  position: relative;
+  height: 180px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+.carousel-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.download-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 44px; /* Increased for better touch target */
+  height: 44px; /* Increased for better touch target */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  /* Mobile optimization - always show download icon by default */
+  opacity: 0.8;
+}
+
+/* On desktop, hide the download icon until hover */
+@media (min-width: 769px) {
+  .download-icon {
+    opacity: 0;
+  }
+  
+  .carousel-item:hover .download-icon {
+    opacity: 1;
+  }
+}
+
+/* Workflow info section */
+.workflow-info {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-info h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.workflow-info p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
+  word-break: break-word; /* Handle long text on mobile */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .workflow-page {
+    padding: 20px 15px;
+  }
+  
+  .workflow-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .image-display {
+    height: 350px;
+    margin-bottom: 20px;
+  }
+
+  .prompt-inputs {
+    gap: 12px;
+  }
+  
+  .prompt-inputs input {
+    font-size: 16px; /* Prevent iOS zoom on focus */
+    padding: 12px;
+  }
+  
+  .prompt-inputs button {
+    padding: 14px;
+    min-height: 50px; /* Good touch target size */
+  }
+  
+  .carousel-images {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  
+  .carousel-item {
+    height: 140px;
+  }
+  
+  .workflow-info {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .workflow-page {
+    padding: 15px 10px;
+  }
+  
+  .workflow-title {
+    font-size: 1.8rem;
+  }
+  
+  .image-display {
+    height: 280px;
+    border-radius: 12px;
+  }
+  
+  .prompt-inputs label {
+    font-size: 1rem;
+  }
+  
+  .prompt-inputs input {
+    padding: 12px;
+  }
+  
+  .prompt-inputs button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+  
+  .carousel h3 {
+    font-size: 1.3rem;
+  }
+  
+  .carousel-images {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  
+  .carousel-item {
+    height: 120px;
+  }
+  
+  .download-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .workflow-info h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .workflow-title {
+    font-size: 1.5rem;
+  }
+  
+  .image-display {
+    height: 240px;
+  }
+  
+  .carousel-images {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .carousel-item {
+    height: 100px;
+  }
+} 

@@ -1,12 +1,17 @@
-// src/pages/FluxDevWorkflows/Claymation/Claymation.jsx
+// src/pages/batch1/Claymation/Claymation.jsx
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { FaDownload, FaRedo } from "react-icons/fa";
 import { loadWorkflow, setPrompt } from "../../../Redux/workflowSlice";
 import { startJob, pollJobStatus } from "../../../api/runpod/runpodApi";
-import "./Claymation.css";
 import LoadingAnimation from "../../../components/LoadingAnimation";
 import LongLoadingAnimation from "../../../components/LongLoadingAmination";
+import RunpodStatus from "../../../components/RunpodStatus";
+import "./Claymation.css";
+import "../../../style/WorkflowPage.css";
+import "../../../style/RunpodStatus.css";
 
 /**
  * Renders the Claymation Workflow Detail Page.
@@ -56,16 +61,37 @@ const Claymation = () => {
 
         // Start job without second argument
         const jobId = await startJob({ input: { action: "warmup" } });
+        if (!jobId) {
+          throw new Error("Failed to get job ID from API");
+        }
+        
+        console.log("Warming up GPU with job ID:", jobId);
         const warmupResult = await pollJobStatus(jobId, 60, 5000);
 
         if (warmupResult && warmupResult.status === "GPU warmed up") {
           setGpuReady(true);
+          console.log("GPU successfully warmed up");
         } else {
           throw new Error("Unexpected warm-up result.");
         }
       } catch (err) {
         console.error("Error warming up GPU:", err);
-        setError("Failed to warm up GPU. Please try again.");
+        // Display more user-friendly error message
+        let errorMessage = "Failed to warm up GPU. ";
+        
+        if (err.message.includes("not found")) {
+          errorMessage += "The API endpoint couldn't be found. Please check your API configuration.";
+        } else if (err.message.includes("Authentication failed")) {
+          errorMessage += "Authentication failed. Please check your API credentials.";
+        } else if (err.message.includes("Unexpected end of JSON")) {
+          errorMessage += "Received an invalid response from the server. API may be offline or misconfigured.";
+        } else {
+          errorMessage += err.message || "Please try again later.";
+        }
+        
+        setError(errorMessage);
+        // Set GPU ready anyway to allow interface interaction
+        setGpuReady(true);
       } finally {
         setIsGpuWarmingUp(false); // Stop the loading animation
       }
@@ -155,6 +181,9 @@ const Claymation = () => {
           <button onClick={() => setGpuReady(false)}>Retry Warm-Up</button>
         </div>
       )}
+
+      {/* Add RunPod API Status component for troubleshooting */}
+      {error && error.includes("API") && <RunpodStatus />}
 
       <div className="prompt-inputs">
         <label htmlFor="prompt-input">Enter your prompt:</label>

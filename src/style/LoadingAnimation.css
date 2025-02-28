@@ -1,11 +1,54 @@
 .loading-animation-container {
-  --uib-size: 65px;
+  --uib-size: 75px;
   --uib-speed: 1.75s;
   position: relative;
   height: var(--uib-size);
   width: var(--uib-size);
   animation: rotate calc(var(--uib-speed) * 4) linear infinite;
-  margin: auto; /* Center the animation */
+  margin: auto;
+  filter: drop-shadow(0 0 15px rgba(138, 77, 232, 0.3));
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-top: 30px;
+  font-weight: 500;
+  text-align: center;
+  animation: pulse 2s infinite;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
 }
 
 @keyframes rotate {
@@ -28,169 +71,99 @@
   width: 100%;
 }
 
-/* Define styles for each particle with gradient colors */
+/* Define styles for each particle with gradient colors using our color variables */
 .loading-particle:nth-child(1) {
   --uib-delay: 0;
   transform: rotate(8deg);
-  color: #e94057; /* Start color */
+  color: var(--primary);
 }
 .loading-particle:nth-child(2) {
   --uib-delay: -0.4;
   transform: rotate(36deg);
-  color: #e84564;
+  color: #e64b75;
 }
 .loading-particle:nth-child(3) {
   --uib-delay: -0.9;
   transform: rotate(72deg);
-  color: #e74b71;
+  color: #e35693;
 }
 .loading-particle:nth-child(4) {
   --uib-delay: -0.5;
   transform: rotate(90deg);
-  color: #e6517e;
+  color: #e062b1;
 }
 .loading-particle:nth-child(5) {
-  --uib-delay: -0.3;
-  transform: rotate(144deg);
-  color: #e5578b;
+  --uib-delay: -1.0;
+  transform: rotate(120deg);
+  color: #dd6dcf;
 }
 .loading-particle:nth-child(6) {
-  --uib-delay: -0.2;
-  transform: rotate(180deg);
-  color: #e45d98;
+  --uib-delay: -0.6;
+  transform: rotate(144deg);
+  color: #cb77d4;
 }
 .loading-particle:nth-child(7) {
-  --uib-delay: -0.6;
-  transform: rotate(216deg);
-  color: #e363a5;
+  --uib-delay: -0.8;
+  transform: rotate(180deg);
+  color: #b982d9;
 }
 .loading-particle:nth-child(13) {
-  --uib-delay: -0.2;
-  transform: rotate(240deg);
-  color: #e269b2;
+  --uib-delay: -1.5;
+  transform: rotate(360deg);
+  color: var(--primary);
 }
 .loading-particle:nth-child(8) {
-  --uib-delay: -0.7;
-  transform: rotate(252deg);
-  color: #e16fbf;
+  --uib-delay: -1.8;
+  transform: rotate(216deg);
+  color: #a789de;
 }
 .loading-particle:nth-child(12) {
-  --uib-delay: -0.5;
-  transform: rotate(290deg);
-  color: #e075cc;
+  --uib-delay: -1.1;
+  transform: rotate(316deg);
+  color: #f14363;
 }
 .loading-particle:nth-child(9) {
-  --uib-delay: -0.1;
-  transform: rotate(300deg);
-  color: #df7bd9;
+  --uib-delay: -0.2;
+  transform: rotate(252deg);
+  color: var(--secondary);
 }
 .loading-particle:nth-child(10) {
-  --uib-delay: -0.8;
-  transform: rotate(324deg);
-  color: #de81e6;
+  --uib-delay: -1.0;
+  transform: rotate(280deg);
+  color: #8f62d1;
 }
 .loading-particle:nth-child(11) {
-  --uib-delay: -1.2;
-  transform: rotate(335deg);
-  color: #8a4de8; /* End color */
+  --uib-delay: -1.4;
+  transform: rotate(320deg);
+  color: #ed435c;
 }
 
 .loading-particle::before {
-  content: "";
-  position: absolute;
-  height: 17.5%;
-  width: 17.5%;
+  content: '';
+  display: block;
+  height: 25%;
+  width: 10%;
   border-radius: 50%;
-  background-color: currentColor; /* Use the color defined in parent */
-  flex-shrink: 0;
-  transition: background-color 0.3s ease;
-  --uib-d: calc(var(--uib-delay) * var(--uib-speed));
-  animation: orbit var(--uib-speed) linear var(--uib-d) infinite;
+  background-color: currentColor;
+  box-shadow: 0 0 15px 0 currentColor;
+  animation: orbit var(--uib-speed) ease-in-out calc(var(--uib-delay) * var(--uib-speed)) infinite;
+  filter: blur(1px);
 }
 
 @keyframes orbit {
   0% {
-    transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
-    opacity: 0.65;
-  }
-  5% {
-    transform: translate(calc(var(--uib-size) * 0.4)) scale(0.684208);
-    opacity: 0.58;
-  }
-  10% {
-    transform: translate(calc(var(--uib-size) * 0.3)) scale(0.631576);
-    opacity: 0.51;
-  }
-  15% {
-    transform: translate(calc(var(--uib-size) * 0.2)) scale(0.578944);
-    opacity: 0.44;
+    transform: translateY(-150%) scale(0.5);
+    opacity: 0.5;
   }
   20% {
-    transform: translate(calc(var(--uib-size) * 0.1)) scale(0.526312);
-    opacity: 0.37;
-  }
-  25% {
-    transform: translate(0%) scale(0.47368);
-    opacity: 0.3;
-  }
-  30% {
-    transform: translate(calc(var(--uib-size) * -0.1)) scale(0.526312);
-    opacity: 0.37;
-  }
-  35% {
-    transform: translate(calc(var(--uib-size) * -0.2)) scale(0.578944);
-    opacity: 0.44;
-  }
-  40% {
-    transform: translate(calc(var(--uib-size) * -0.3)) scale(0.631576);
-    opacity: 0.51;
-  }
-  45% {
-    transform: translate(calc(var(--uib-size) * -0.4)) scale(0.684208);
-    opacity: 0.58;
-  }
-  50% {
-    transform: translate(calc(var(--uib-size) * -0.5)) scale(0.73684);
-    opacity: 0.65;
-  }
-  55% {
-    transform: translate(calc(var(--uib-size) * -0.4)) scale(0.789472);
-    opacity: 0.72;
-  }
-  60% {
-    transform: translate(calc(var(--uib-size) * -0.3)) scale(0.842104);
-    opacity: 0.79;
-  }
-  65% {
-    transform: translate(calc(var(--uib-size) * -0.2)) scale(0.894736);
-    opacity: 0.86;
-  }
-  70% {
-    transform: translate(calc(var(--uib-size) * -0.1)) scale(0.947368);
-    opacity: 0.93;
-  }
-  75% {
-    transform: translate(0%) scale(1);
-    opacity: 1;
+    opacity: 0.9;
   }
   80% {
-    transform: translate(calc(var(--uib-size) * 0.1)) scale(0.947368);
-    opacity: 0.93;
-  }
-  85% {
-    transform: translate(calc(var(--uib-size) * 0.2)) scale(0.894736);
-    opacity: 0.86;
-  }
-  90% {
-    transform: translate(calc(var(--uib-size) * 0.3)) scale(0.842104);
-    opacity: 0.79;
-  }
-  95% {
-    transform: translate(calc(var(--uib-size) * 0.4)) scale(0.789472);
-    opacity: 0.72;
+    transform: translateY(150%) scale(1);
+    opacity: 0.9;
   }
   100% {
-    transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
-    opacity: 0.65;
+    transform: translateY(150%) scale(0.5);
+    opacity: 0.5;
   }
 }

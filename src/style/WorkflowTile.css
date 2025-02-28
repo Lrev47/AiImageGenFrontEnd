@@ -1,98 +1,180 @@
 /* WorkflowTile.css */
 .workflow-tile {
   position: relative;
-  width: 250px;
-  height: 300px;
-  background: #1c1c1c;
-  border-radius: 10px;
+  width: 100%;
+  height: 320px;
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   text-decoration: none;
-  color: #ffffff;
+  color: var(--text-primary);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(233, 64, 87, 0.03), rgba(138, 77, 232, 0.03));
+  z-index: 0;
 }
 
 .workflow-tile:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(138, 77, 232, 0.3);
+}
+
+.workflow-tile:hover .tile-image {
+  transform: scale(1.1);
 }
 
 .tile-image {
   background-size: cover;
   background-position: center;
-  height: 60%;
+  height: 65%;
+  z-index: 1;
+  transition: transform 0.6s ease;
+  position: relative;
+}
+
+.tile-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to top, rgba(30, 30, 30, 0.9), transparent);
+  z-index: 2;
 }
 
 .tile-content {
-  padding: 10px;
-  text-align: center; /* Center the content horizontally */
+  padding: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .tile-title {
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1.25em;
+  font-weight: 700;
   margin: 0;
-  background: linear-gradient(90deg, #e94057, #8a4de8);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 5px; /* Add some spacing below the title */
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
 }
 
 .tile-description {
   font-size: 0.9em;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
   margin-top: 5px;
-  margin-bottom: 0; /* Remove default bottom margin */
+  margin-bottom: 8px;
+  line-height: 1.4;
+  max-height: 2.8em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tile-tags {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.tile-tag {
+  font-size: 0.7em;
+  background: rgba(65, 67, 106, 0.3);
+  color: var(--text-secondary);
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.tile-tag-more {
+  background: rgba(233, 64, 87, 0.2);
+  color: var(--text-primary);
+}
+
+.workflow-tile:hover .tile-tag {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .workflow-tile.retro-anime .tile-image {
-  background-position: center bottom; /* Adjust as needed */
+  background-position: center bottom;
 }
 
-/* Responsive Adjustments */
+/* Specialty tile styles */
+.workflow-tile.special::before {
+  background: linear-gradient(45deg, rgba(233, 64, 87, 0.1), rgba(138, 77, 232, 0.1));
+  animation: gradient-pulse 3s infinite alternate;
+}
 
-/* For roughly half-screen (tablets or smaller desktops) */
+@keyframes gradient-pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Responsive styles */
 @media (max-width: 900px) {
   .workflow-tile {
-    width: 200px; /* Slightly smaller width */
-    height: 260px; /* Slightly smaller height */
+    width: 100%;
+    height: 300px;
   }
-
+  
   .tile-title {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
-
+  
   .tile-description {
     font-size: 0.85em;
   }
 }
 
-/* For mobile screens (phones) */
 @media (max-width: 600px) {
   .workflow-tile {
-    width: calc(25% - 10px); /* Fit two tiles per row with a small gap */
-    height: 250px; /* Maintain tile height */
-    margin: 0; /* Add spacing between tiles */
+    width: 100%;
+    height: 280px;
+    margin-bottom: 15px;
   }
-
+  
   .tile-image {
-    height: 60%; /* Ensure the image stays proportional */
+    height: 60%;
   }
-
+  
   .tile-title {
-    font-size: 0.8em; /* Slightly smaller font size */
+    font-size: 1.1em;
   }
-
+  
   .tile-description {
-    font-size: 0.5em; /* Slightly smaller font size */
-  }
-
-  /* Ensure the grid container adjusts for smaller tiles */
-  .workflow-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Add spacing between tiles */
-    justify-content: center; /* Center the grid on the screen */
+    font-size: 0.8em;
+    -webkit-line-clamp: 2;
   }
 }

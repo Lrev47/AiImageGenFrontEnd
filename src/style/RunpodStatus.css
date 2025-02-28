@@ -1,0 +1,155 @@
+/* src/style/RunpodStatus.css */
+.runpod-status {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  word-break: break-word; /* For long error messages on mobile */
+}
+
+.runpod-status.error {
+  border-color: rgba(233, 64, 87, 0.5);
+  background-color: rgba(233, 64, 87, 0.05);
+}
+
+.runpod-status.connected {
+  border-color: rgba(64, 233, 120, 0.5);
+  background-color: rgba(64, 233, 120, 0.05);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  min-height: 36px; /* Better touch target */
+}
+
+.status-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  flex-shrink: 0; /* Prevent icon from shrinking on small screens */
+}
+
+.status-icon.connected {
+  color: rgba(64, 233, 120, 0.9);
+}
+
+.status-icon.checking {
+  color: var(--secondary);
+  animation: pulse 1.5s infinite;
+}
+
+.status-icon.error {
+  color: rgba(233, 64, 87, 0.9);
+}
+
+.status-text {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.runpod-error-details {
+  margin-top: 15px;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.error-message {
+  color: rgba(233, 64, 87, 0.9);
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.runpod-troubleshooting {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.runpod-troubleshooting h4 {
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.runpod-troubleshooting ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.runpod-troubleshooting li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.retry-button {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; /* Better touch target */
+  min-width: 100px; /* Better touch target */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.retry-button:active {
+  transform: translateY(1px);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .runpod-status {
+    padding: 10px 12px;
+  }
+  
+  .status-indicator {
+    min-height: 30px;
+  }
+  
+  .status-icon {
+    font-size: 1rem;
+  }
+  
+  .status-text {
+    font-size: 0.9rem;
+  }
+  
+  .runpod-error-details {
+    padding: 12px;
+  }
+  
+  .runpod-troubleshooting {
+    padding: 12px;
+  }
+  
+  .runpod-troubleshooting li {
+    font-size: 0.9rem;
+  }
+} 
